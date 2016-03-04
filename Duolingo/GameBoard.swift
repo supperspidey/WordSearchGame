@@ -8,13 +8,11 @@
 
 import UIKit
 
-class GameBoard: NSObject {
+class GameBoard {
     private(set) var sourceWord: String?
     private(set) var characterGrid: [[String]]?
     
     init?(withSourceWord source: String?, characterGrid: [[String]]?) {
-        super.init()
-        
         guard let theSource = source, theCharacterGrid = characterGrid else {
             return nil
         }
