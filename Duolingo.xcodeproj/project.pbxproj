@@ -14,6 +14,10 @@
 		735E5AAE1C89F75500E57F70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 735E5AAC1C89F75500E57F70 /* LaunchScreen.storyboard */; };
 		735E5AB91C89F75500E57F70 /* DuolingoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735E5AB81C89F75500E57F70 /* DuolingoTests.swift */; };
 		735E5AC41C89F75500E57F70 /* DuolingoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735E5AC31C89F75500E57F70 /* DuolingoUITests.swift */; };
+		735E5AD61C89F8AC00E57F70 /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735E5AD51C89F8AC00E57F70 /* GameBoard.swift */; };
+		735E5AD81C89F8BD00E57F70 /* GameBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735E5AD71C89F8BD00E57F70 /* GameBoardView.swift */; };
+		735E5ADA1C8A050000E57F70 /* GameBoardDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735E5AD91C8A050000E57F70 /* GameBoardDataSource.swift */; };
+		735E5ADC1C8A101600E57F70 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735E5ADB1C8A101600E57F70 /* Queue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +51,10 @@
 		735E5ABF1C89F75500E57F70 /* DuolingoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DuolingoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		735E5AC31C89F75500E57F70 /* DuolingoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuolingoUITests.swift; sourceTree = "<group>"; };
 		735E5AC51C89F75500E57F70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		735E5AD51C89F8AC00E57F70 /* GameBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
+		735E5AD71C89F8BD00E57F70 /* GameBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoardView.swift; sourceTree = "<group>"; };
+		735E5AD91C8A050000E57F70 /* GameBoardDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoardDataSource.swift; sourceTree = "<group>"; };
+		735E5ADB1C8A101600E57F70 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +111,10 @@
 				735E5AAA1C89F75500E57F70 /* Assets.xcassets */,
 				735E5AAC1C89F75500E57F70 /* LaunchScreen.storyboard */,
 				735E5AAF1C89F75500E57F70 /* Info.plist */,
+				735E5AD51C89F8AC00E57F70 /* GameBoard.swift */,
+				735E5AD71C89F8BD00E57F70 /* GameBoardView.swift */,
+				735E5AD91C8A050000E57F70 /* GameBoardDataSource.swift */,
+				735E5ADB1C8A101600E57F70 /* Queue.swift */,
 			);
 			path = Duolingo;
 			sourceTree = "<group>";
@@ -257,7 +269,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				735E5AA61C89F75500E57F70 /* ViewController.swift in Sources */,
+				735E5ADC1C8A101600E57F70 /* Queue.swift in Sources */,
+				735E5ADA1C8A050000E57F70 /* GameBoardDataSource.swift in Sources */,
+				735E5AD61C89F8AC00E57F70 /* GameBoard.swift in Sources */,
 				735E5AA41C89F75500E57F70 /* AppDelegate.swift in Sources */,
+				735E5AD81C89F8BD00E57F70 /* GameBoardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
