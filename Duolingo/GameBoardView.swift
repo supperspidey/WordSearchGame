@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 struct GridCoordinate {
     let row: UInt
@@ -19,6 +20,7 @@ protocol GameBoardViewDelegate: class {
 }
 
 class GameBoardView: UIView {
+    
     private var selectedColor: UIColor
     private var unselectedColor: UIColor
     private var initialGridCoordinate: GridCoordinate?
@@ -56,13 +58,7 @@ class GameBoardView: UIView {
                     return
                 }
                 
-                if coord.row == initialCoord.row {
-                    view.backgroundColor = selectedColor
-                } else if coord.col == initialCoord.col {
-                    view.backgroundColor = selectedColor
-                } else if abs(Int(coord.row) - Int(initialCoord.row)) == abs(Int(coord.col) - Int(initialCoord.col)) {
-                    view.backgroundColor = selectedColor
-                }
+                self.highlightPath(initialCoordinate: initialCoord, finalCoordinate: coord)
             }
         } else if panGesture.state == .Ended {
             self.delegate?.gameBoardViewDidFinishSelectingCharacters()
@@ -75,6 +71,51 @@ class GameBoardView: UIView {
         }
     }
     
+    private func highlightPath(initialCoordinate initialCoord: GridCoordinate, finalCoordinate finalCoord: GridCoordinate) {
+        // TODO: optimize this part. Save the path to an array, and only deselect views that are not in the path
+        self.deselectAllCharacters()
+        
+        if finalCoord.row == initialCoord.row {
+            var step = 0
+            if Int(finalCoord.col) - Int(initialCoord.col) > 0 {
+                step = 1
+            } else {
+                step = -1
+            }
+            
+            for col in initialCoord.col.stride(through: finalCoord.col, by: step) {
+                let view = self.viewAtGridCoordinate(coordinate: GridCoordinate(row: initialCoord.row, col: col))
+                view?.backgroundColor = self.selectedColor
+            }
+        } else if finalCoord.col == initialCoord.col {
+            var step = 0
+            if Int(finalCoord.row) - Int(initialCoord.row) > 0 {
+                step = 1
+            } else {
+                step = -1
+            }
+            
+            for row in initialCoord.row.stride(through: finalCoord.row, by: step) {
+                let view = self.viewAtGridCoordinate(coordinate: GridCoordinate(row: row, col: initialCoord.col))
+                view?.backgroundColor = self.selectedColor
+            }
+        } else if Int(finalCoord.row) - Int(initialCoord.row) == Int(finalCoord.col) - Int(initialCoord.col) {
+            var step = 0
+            if Int(finalCoord.row) - Int(initialCoord.row) > 0 {
+                step = 1
+            } else {
+                step = -1
+            }
+            
+            for stair in initialCoord.row.stride(through: finalCoord.row, by: step) {
+                let view = self.viewAtGridCoordinate(coordinate: GridCoordinate(row: stair, col: stair))
+                view?.backgroundColor = self.selectedColor
+            }
+        } else {
+            return
+        }
+    }
+    
     func getGridCoordinate(ofSubview view: UIView?) -> GridCoordinate? {
         guard let theView = view else {
             return nil
@@ -84,11 +125,7 @@ class GameBoardView: UIView {
             return nil
         }
         
-        guard let theDelegate = delegate else {
-            return nil
-        }
-        
-        guard let gridDimension = theDelegate.dimensionOfGrid() else {
+        guard let gridDimension = delegate?.dimensionOfGrid() else {
             return nil
         }
         
@@ -97,6 +134,15 @@ class GameBoardView: UIView {
     
     private func convert(index index: UInt, toCoordinateInGridWithDimension dimension: [UInt]) -> GridCoordinate {
         return GridCoordinate(row: index / dimension[0], col: index % dimension[1])
+    }
+    
+    private func viewAtGridCoordinate(coordinate coord: GridCoordinate) -> UIView? {
+        guard let gridDimension = self.delegate?.dimensionOfGrid() else {
+            return nil
+        }
+        
+        let index = Int(coord.row * gridDimension[0] + coord.col)
+        return self.subviews[index]
     }
     
     override func didAddSubview(subview: UIView) {
