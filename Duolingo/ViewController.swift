@@ -56,7 +56,14 @@ class ViewController: UIViewController {
         var yPos: CGFloat = space
         var currentRow: UInt = 0
         let viewDimension: CGFloat = (superViewDimension - CGFloat(dimension[0]+1) * space) / CGFloat(dimension[0])
+        let color = UIColor.whiteColor()
         for (index, aView) in gameBoardView.subviews.enumerate() {
+            if aView.isKindOfClass(UILabel) {
+                let label = aView as! UILabel
+                label.textAlignment = .Center
+            }
+            
+            aView.backgroundColor = color
             let coord = self.convert(index: UInt(index), toCoordinateInGridWithDimension: dimension)
             if coord.row == currentRow {
                 aView.frame = CGRectMake(xPos, yPos, viewDimension, viewDimension)
