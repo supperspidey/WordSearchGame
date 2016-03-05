@@ -80,4 +80,5 @@ class GameBoardDataSource: NSObject {
     func revealNextGame() -> GameBoard? {
         return gameBoardsQueue.dequeue()
     }
+    
 }

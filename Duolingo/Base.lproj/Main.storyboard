@@ -80,6 +80,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="gameBoardView" destination="dVX-9I-ZBK" id="S9Z-k9-5Gx"/>
                         <outlet property="sourceWordLabel" destination="kio-vz-nZy" id="Fqt-yH-TiM"/>
                     </connections>
                 </viewController>
