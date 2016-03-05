@@ -14,5 +14,31 @@ struct GridCoordinate {
 }
 
 class GameBoardView: UIView {
-
+    private var selectedColor: UIColor?
+    private var unselectedColor: UIColor?
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.selectedColor = UIColor.grayColor()
+        self.unselectedColor = UIColor.whiteColor()
+        
+        super.init(coder: aDecoder)
+    }
+    
+    @IBAction func handlePanGesture(panGesture: UIPanGestureRecognizer) {
+        if panGesture.state == .Changed {
+            guard let view = self.hitTest(panGesture.locationInView(self), withEvent: nil) else {
+                return
+            }
+            
+            if view.isKindOfClass(UILabel) {
+                let label = view as! UILabel
+                label.backgroundColor = selectedColor
+            }
+        }
+    }
+    
+    override func didAddSubview(subview: UIView) {
+        subview.userInteractionEnabled = true
+        subview.backgroundColor = unselectedColor
+    }
 }
