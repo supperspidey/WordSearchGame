@@ -419,6 +419,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = vanlenguyen.Duolingo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -430,6 +431,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = vanlenguyen.Duolingo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -500,6 +502,7 @@
 				735E5ACA1C89F75500E57F70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		735E5ACB1C89F75500E57F70 /* Build configuration list for PBXNativeTarget "DuolingoTests" */ = {
 			isa = XCConfigurationList;
@@ -508,6 +511,7 @@
 				735E5ACD1C89F75500E57F70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		735E5ACE1C89F75500E57F70 /* Build configuration list for PBXNativeTarget "DuolingoUITests" */ = {
 			isa = XCConfigurationList;
@@ -516,6 +520,7 @@
 				735E5AD01C89F75500E57F70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
