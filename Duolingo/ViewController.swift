@@ -8,16 +8,19 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, GameBoardViewDelegate {
     
     @IBOutlet weak var sourceWordLabel: UILabel!
     @IBOutlet weak var gameBoardView: GameBoardView!
     
     private let dataSource = GameBoardDataSource()
+    private var currentGameBoard: GameBoard?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        self.gameBoardView.delegate = self
         
         dataSource.fetchGameBoardData { [weak self] () -> Void in
             if let strongSelf = self {
@@ -32,8 +35,9 @@ class ViewController: UIViewController {
         }
         
         sourceWordLabel.text = gameBoard.sourceWord
+        self.currentGameBoard = gameBoard
         
-        guard let grid = gameBoard.characterGrid else {
+        guard let grid = gameBoard.characterGrid, gridSize = gameBoard.gridSize else {
             return
         }
         
@@ -45,8 +49,7 @@ class ViewController: UIViewController {
             }
         }
         
-        let gridSize: UInt = UInt(grid.count)
-        self.layoutSubviewsInGameBoardView(gridDimension: [gridSize, gridSize])
+        self.layoutSubviewsInGameBoardView(gridDimension: gridSize)
     }
     
     private func layoutSubviewsInGameBoardView(gridDimension dimension: [UInt]) {
@@ -56,28 +59,34 @@ class ViewController: UIViewController {
         var yPos: CGFloat = space
         var currentRow: UInt = 0
         let viewDimension: CGFloat = (superViewDimension - CGFloat(dimension[0]+1) * space) / CGFloat(dimension[0])
-        for (index, aView) in gameBoardView.subviews.enumerate() {
+        for aView in gameBoardView.subviews {
             if aView.isKindOfClass(UILabel) {
                 let label = aView as! UILabel
                 label.textAlignment = .Center
-            }
-            
-            let coord = self.convert(index: UInt(index), toCoordinateInGridWithDimension: dimension)
-            if coord.row == currentRow {
-                aView.frame = CGRectMake(xPos, yPos, viewDimension, viewDimension)
-                xPos += (viewDimension + space)
-            } else {
-                currentRow++
-                xPos = space
-                yPos += (viewDimension + space)
-                aView.frame = CGRectMake(xPos, yPos, viewDimension, viewDimension)
-                xPos += (viewDimension + space)
+                guard let coord = gameBoardView.getGridCoordinate(ofSubview: aView) else {
+                    continue
+                }
+                
+                if coord.row == currentRow {
+                    aView.frame = CGRectMake(xPos, yPos, viewDimension, viewDimension)
+                    xPos += (viewDimension + space)
+                } else {
+                    currentRow++
+                    xPos = space
+                    yPos += (viewDimension + space)
+                    aView.frame = CGRectMake(xPos, yPos, viewDimension, viewDimension)
+                    xPos += (viewDimension + space)
+                }
             }
         }
     }
     
-    private func convert(index index: UInt, toCoordinateInGridWithDimension dimension: [UInt]) -> GridCoordinate {
-        return GridCoordinate(row: index / dimension[0], col: index % dimension[1])
+    func dimensionOfGrid() -> [UInt]? {
+        return self.currentGameBoard?.gridSize
+    }
+    
+    func gameBoardViewDidFinishSelectingCharacters() {
+        self.gameBoardView.deselectAllCharacters()
     }
 
     override func didReceiveMemoryWarning() {

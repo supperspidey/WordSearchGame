@@ -11,6 +11,7 @@ import UIKit
 class GameBoard {
     private(set) var sourceWord: String?
     private(set) var characterGrid: [[String]]?
+    private(set) var gridSize: [UInt]?
     
     init?(withSourceWord source: String?, characterGrid: [[String]]?) {
         guard let theSource = source, theCharacterGrid = characterGrid else {
@@ -19,5 +20,6 @@ class GameBoard {
         
         self.sourceWord = theSource
         self.characterGrid = theCharacterGrid
+        self.gridSize = [UInt(theCharacterGrid.count), UInt(theCharacterGrid.count)]
     }
 }
