@@ -62,20 +62,20 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="t7s-Pp-FgR"/>
-                                <exclude reference="vIV-Sk-mwZ"/>
                                 <exclude reference="KQB-sA-cKe"/>
                                 <exclude reference="keS-YL-RdC"/>
                                 <exclude reference="tga-w3-8TT"/>
+                                <exclude reference="t7s-Pp-FgR"/>
+                                <exclude reference="vIV-Sk-mwZ"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
-                                <include reference="t7s-Pp-FgR"/>
-                                <include reference="vIV-Sk-mwZ"/>
                                 <include reference="KQB-sA-cKe"/>
                                 <include reference="keS-YL-RdC"/>
                                 <include reference="tga-w3-8TT"/>
+                                <include reference="t7s-Pp-FgR"/>
+                                <include reference="vIV-Sk-mwZ"/>
                             </mask>
                         </variation>
                     </view>
