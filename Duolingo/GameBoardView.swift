@@ -32,6 +32,7 @@ class GameBoardView: UIView {
     private var unselectedColor: UIColor
     private var initialGridCoordinate: GridCoordinate?
     private var finalGridCoordinate: GridCoordinate?
+    private var previousFinalGridCoordinate: GridCoordinate?
     private var correctPaths: [[GridCoordinate]]
     
     weak var delegate: GameBoardViewDelegate?
@@ -68,8 +69,14 @@ class GameBoardView: UIView {
                     return
                 }
                 
-                self.finalGridCoordinate = coord
-                self.highlightPath(initialCoordinate: initialCoord, finalCoordinate: coord)
+                let direction = self.determineDirection(initialCoordinate: initialCoord, finalCoordinate: coord)
+                if direction == HighlightDirection.Undefined {
+                    return
+                } else {
+                    self.previousFinalGridCoordinate = (self.previousFinalGridCoordinate == nil ? coord : finalGridCoordinate)
+                    self.finalGridCoordinate = coord
+                    self.highlightPath(initialCoordinate: initialCoord, finalCoordinate: coord)
+                }
             }
         } else if panGesture.state == .Ended {
             let visitedCoords = self.generateVisitedCoordinates()
@@ -150,28 +157,6 @@ class GameBoardView: UIView {
         }
     }
     
-    private func unhighlightAllCharactersExceptTheOnesInCorrectPaths() {
-        var indicesToHighlight = [Int]()
-        
-        guard let gridDimension = delegate?.dimensionOfGrid() else {
-            return
-        }
-        
-        for path in self.correctPaths {
-            for coord in path {
-                indicesToHighlight.append(self.convert(coordinate: coord, toIndexWithGridDimension: gridDimension))
-            }
-        }
-        
-        for (i, subview) in self.subviews.enumerate() {
-            if indicesToHighlight.contains(i) {
-                subview.backgroundColor = self.selectedColor
-            } else {
-                subview.backgroundColor = self.unselectedColor
-            }
-        }
-    }
-    
     func unhighlightSelectedCharacters() {
         guard let initialCoord = self.initialGridCoordinate, finalCoord = self.finalGridCoordinate else {
             return
@@ -192,7 +177,7 @@ class GameBoardView: UIView {
                 self.unhighlightCharacter(atCoordinate: GridCoordinate(row: initialCoord.row, col: col))
             }
             
-            self.unhighlightAllCharactersExceptTheOnesInCorrectPaths()
+            self.highlightCorrectPaths()
             
         case .Vertical:
             let step = Int(finalCoord.row) - Int(initialCoord.row) > 0 ? 1 : -1
@@ -201,7 +186,7 @@ class GameBoardView: UIView {
                 self.unhighlightCharacter(atCoordinate: GridCoordinate(row: row, col: initialCoord.col))
             }
             
-            self.unhighlightAllCharactersExceptTheOnesInCorrectPaths()
+            self.highlightCorrectPaths()
             
         case .Diagonal:
             let rowStep = Int(finalCoord.row) - Int(initialCoord.row) > 0 ? 1 : -1
@@ -219,17 +204,28 @@ class GameBoardView: UIView {
                 }
             }
             
-            self.unhighlightAllCharactersExceptTheOnesInCorrectPaths()
+            self.highlightCorrectPaths()
             
         default:
-            self.unhighlightAllCharactersExceptTheOnesInCorrectPaths()
+            self.highlightCorrectPaths()
             return
         }
     }
     
+    private func highlightCorrectPaths() {
+        for path in self.correctPaths {
+            for coord in path {
+                self.highlightCharacter(atCoordinate: coord)
+            }
+        }
+    }
+    
     private func highlightPath(initialCoordinate initialCoord: GridCoordinate, finalCoordinate finalCoord: GridCoordinate) {
-        // TODO: optimize this part. Save the path to an array, and only deselect views that are not in the path
-        self.unhighlightAllCharactersExceptTheOnesInCorrectPaths()
+        guard let previousFinalCoord = self.previousFinalGridCoordinate else {
+            return
+        }
+        self.unhighlightPath(initialCoordinate: initialCoord, finalCoordinate: previousFinalCoord)
+        
         
         let direction = self.determineDirection(initialCoordinate: initialCoord, finalCoordinate: finalCoord)
         
