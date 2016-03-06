@@ -70,6 +70,7 @@ class GameBoardView: UIView {
                 
                 self.finalGridCoordinate = coord
                 self.highlightPath(initialCoordinate: initialCoord, finalCoordinate: coord)
+                print(initialCoord, coord)
             }
         } else if panGesture.state == .Ended {
             let visitedCoords = self.generateVisitedCoordinates()
@@ -115,6 +116,7 @@ class GameBoardView: UIView {
                 
                 if row == finalCoord.row && col == finalCoord.col {
                     self.highlightCharacter(atCoordinate: GridCoordinate(row: row, col: col))
+                    coords.append(GridCoordinate(row: row, col: col))
                 }
             }
             return coords
@@ -240,7 +242,6 @@ class GameBoardView: UIView {
             for col in initialCoord.col.stride(through: finalCoord.col, by: step) {
                 self.highlightCharacter(atCoordinate: GridCoordinate(row: initialCoord.row, col: col))
             }
-//            self.unhighlightAllCharactersExceptTheOnesInCorrectPaths()
             
         case .Vertical:
             let step = Int(finalCoord.row) - Int(initialCoord.row) > 0 ? 1 : -1
@@ -248,7 +249,6 @@ class GameBoardView: UIView {
             for row in initialCoord.row.stride(through: finalCoord.row, by: step) {
                 self.highlightCharacter(atCoordinate: GridCoordinate(row: row, col: initialCoord.col))
             }
-//            self.unhighlightAllCharactersExceptTheOnesInCorrectPaths()
             
         case .Diagonal:
             let rowStep = Int(finalCoord.row) - Int(initialCoord.row) > 0 ? 1 : -1
@@ -265,7 +265,6 @@ class GameBoardView: UIView {
                     self.highlightCharacter(atCoordinate: GridCoordinate(row: row, col: col))
                 }
             }
-//            self.unhighlightAllCharactersExceptTheOnesInCorrectPaths()
             
         default:
             return
