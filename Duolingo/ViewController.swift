@@ -29,6 +29,22 @@ class ViewController: UIViewController, GameBoardViewDelegate {
         }
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        
+        coordinator.animateAlongsideTransition({ (context: UIViewControllerTransitionCoordinatorContext) -> Void in
+            guard let gridSize = self.currentGameBoard?.gridSize else {
+                return
+            }
+            self.layoutSubviewsInGameBoardView(gridDimension: gridSize)
+            }, completion: nil)
+    }
+    
     private func loadNextGameBoard() -> Void {
         guard let gameBoard = dataSource.revealNextGame() else {
             return
@@ -142,12 +158,6 @@ class ViewController: UIViewController, GameBoardViewDelegate {
         }
         return coords
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 

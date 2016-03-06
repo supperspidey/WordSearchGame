@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -19,15 +20,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kio-vz-nZy">
+                                <rect key="frame" x="279" y="62" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dVX-9I-ZBK" customClass="GameBoardView" customModule="Duolingo" customModuleProvider="target">
                                 <rect key="frame" x="180" y="143" width="240" height="128"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <constraints>
+                                    <constraint firstAttribute="width" secondItem="dVX-9I-ZBK" secondAttribute="height" multiplier="1:1" id="FlV-mi-NbO"/>
                                     <constraint firstAttribute="width" secondItem="dVX-9I-ZBK" secondAttribute="height" id="a8O-Ji-6gq"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="FlV-mi-NbO"/>
                                         <exclude reference="a8O-Ji-6gq"/>
                                     </mask>
                                 </variation>
@@ -39,26 +48,24 @@
                                         <include reference="a8O-Ji-6gq"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="220" y="220" width="360" height="360"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="FlV-mi-NbO"/>
+                                    </mask>
                                 </variation>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="veb-vk-17k" appends="YES" id="9TG-1n-M0J"/>
                                 </connections>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kio-vz-nZy">
-                                <rect key="frame" x="279" y="62" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="379" y="104" width="42" height="21"/>
-                                </variation>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="kio-vz-nZy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8QN-2G-l6N"/>
+                            <constraint firstItem="dVX-9I-ZBK" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.6" id="BDY-UL-rWS"/>
                             <constraint firstItem="dVX-9I-ZBK" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="KQB-sA-cKe"/>
+                            <constraint firstItem="kio-vz-nZy" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="49" id="V39-NN-NUb"/>
+                            <constraint firstItem="dVX-9I-ZBK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ct4-WE-Ywi"/>
+                            <constraint firstItem="dVX-9I-ZBK" firstAttribute="top" secondItem="kio-vz-nZy" secondAttribute="bottom" constant="36" id="dRW-OT-65O"/>
                             <constraint firstItem="dVX-9I-ZBK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="keS-YL-RdC"/>
                             <constraint firstItem="kio-vz-nZy" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="22" id="t7s-Pp-FgR"/>
                             <constraint firstItem="dVX-9I-ZBK" firstAttribute="top" secondItem="kio-vz-nZy" secondAttribute="bottom" constant="36" id="tga-w3-8TT"/>
@@ -66,9 +73,14 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="BDY-UL-rWS"/>
                                 <exclude reference="KQB-sA-cKe"/>
+                                <exclude reference="ct4-WE-Ywi"/>
+                                <exclude reference="dRW-OT-65O"/>
                                 <exclude reference="keS-YL-RdC"/>
                                 <exclude reference="tga-w3-8TT"/>
+                                <exclude reference="8QN-2G-l6N"/>
+                                <exclude reference="V39-NN-NUb"/>
                                 <exclude reference="t7s-Pp-FgR"/>
                                 <exclude reference="vIV-Sk-mwZ"/>
                             </mask>
@@ -80,6 +92,15 @@
                                 <include reference="tga-w3-8TT"/>
                                 <include reference="t7s-Pp-FgR"/>
                                 <include reference="vIV-Sk-mwZ"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="BDY-UL-rWS"/>
+                                <include reference="ct4-WE-Ywi"/>
+                                <include reference="dRW-OT-65O"/>
+                                <include reference="8QN-2G-l6N"/>
+                                <include reference="V39-NN-NUb"/>
                             </mask>
                         </variation>
                     </view>
