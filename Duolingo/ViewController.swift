@@ -86,7 +86,7 @@ class ViewController: UIViewController, GameBoardViewDelegate {
     }
     
     func gameBoardViewDidFinishSelectingCharacters() {
-        self.gameBoardView.deselectAllCharacters()
+        self.gameBoardView.unhighlightAllCharacters()
     }
 
     override func didReceiveMemoryWarning() {
