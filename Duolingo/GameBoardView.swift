@@ -70,7 +70,6 @@ class GameBoardView: UIView {
                 
                 self.finalGridCoordinate = coord
                 self.highlightPath(initialCoordinate: initialCoord, finalCoordinate: coord)
-                print(initialCoord, coord)
             }
         } else if panGesture.state == .Ended {
             let visitedCoords = self.generateVisitedCoordinates()

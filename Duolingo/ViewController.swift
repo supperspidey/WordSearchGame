@@ -41,12 +41,14 @@ class ViewController: UIViewController, GameBoardViewDelegate {
             guard let gridSize = self.currentGameBoard?.gridSize else {
                 return
             }
+            
             self.layoutSubviewsInGameBoardView(gridDimension: gridSize)
             }, completion: nil)
     }
     
     private func loadNextGameBoard() -> Void {
         guard let gameBoard = dataSource.revealNextGame() else {
+            self.navigationController?.popViewControllerAnimated(true)
             return
         }
         
