@@ -12,9 +12,9 @@ class GameBoard {
     private(set) var sourceWord: String?
     private(set) var characterGrid: [[String]]?
     private(set) var gridSize: [UInt]?
-    private(set) var answerLocations: [GridCoordinate]?
+    private(set) var answerLocations: [[GridCoordinate]]?
     
-    init?(withSourceWord source: String?, characterGrid: [[String]]?, answerLocations: [GridCoordinate]?) {
+    init?(withSourceWord source: String?, characterGrid: [[String]]?, answerLocations: [[GridCoordinate]]?) {
         guard let theSource = source, theCharacterGrid = characterGrid else {
             return nil
         }
@@ -26,16 +26,20 @@ class GameBoard {
     }
     
     func checkAnswer(withCoordinates coords: [GridCoordinate]?) -> Bool {
-        guard let theCoords = coords, correctCoords = self.answerLocations else {
+        guard let theCoords = coords, correctCoordsSet = self.answerLocations else {
             return false
         }
         
-        if theCoords.count != correctCoords.count {
-            return false
+        var potentialCorrectIndex = 0
+        for (index, correctCoords) in correctCoordsSet.enumerate() {
+            if theCoords.count == correctCoords.count {
+                potentialCorrectIndex = index
+                break
+            }
         }
         
         for (index, coord) in theCoords.enumerate() {
-            let correctCoord = correctCoords[index]
+            let correctCoord = correctCoordsSet[potentialCorrectIndex][index]
             if coord.col != correctCoord.col || coord.row != correctCoord.row {
                 return false
             }

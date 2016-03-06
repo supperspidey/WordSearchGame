@@ -34,6 +34,10 @@ class ViewController: UIViewController, GameBoardViewDelegate {
             return
         }
         
+        for subview in self.gameBoardView.subviews {
+            subview.removeFromSuperview()
+        }
+        
         sourceWordLabel.text = gameBoard.sourceWord
         self.currentGameBoard = gameBoard
         
@@ -93,7 +97,7 @@ class ViewController: UIViewController, GameBoardViewDelegate {
         }
         
         if gameBoard.checkAnswer(withCoordinates: visitedCoords) {
-            print("Yes!")
+            self.loadNextGameBoard()
         } else {
             print("No!")
         }
