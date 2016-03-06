@@ -1,0 +1,18 @@
+{
+    "source_language": "en",
+    "word": "boy",
+    "character_grid": [
+                       ["x", "c", "e", "x", "c", "i", "o"],
+                       ["e", "z", "q", "r", "h", "w", "y"],
+                       ["\u00f1", "\u00e9", "\u00f1", "w", "i", "n", "\u00e1"],
+                       ["o", "l", "a", "\u00e1", "c", "i", "n"],
+                       ["r", "v", "\u00f1", "s", "o", "\u00f1", "w"],
+                       ["k", "m", "w", "a", "\u00fc", "o", "w"],
+                       ["\u00f3", "r", "\u00fa", "b", "l", "g", "\u00fa"]
+                       ],
+    "word_locations": {
+        "5,2,5,3,5,4,5,5": "ni\u00f1o",
+        "4,0,4,1,4,2,4,3,4,4": "chico"
+    },
+    "target_language": "es"
+}

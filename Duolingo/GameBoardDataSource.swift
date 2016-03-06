@@ -42,20 +42,18 @@ class GameBoardDataSource: NSObject {
                     }
                     
                     do {
-                        let json = try NSJSONSerialization.JSONObjectWithData(gameData, options: .AllowFragments) as? NSDictionary
-                        
-                        guard let dict = json else {
+                        guard let dict = try NSJSONSerialization.JSONObjectWithData(gameData, options: .AllowFragments) as? NSDictionary else {
                             continue
                         }
                         
                         if let strongSelf = self {
-                            guard let source = dict["word"] as? String,
-                                grid = dict["character_grid"] as? [[String]],
-                                answerDict = dict["word_locations"] as? [String: String] else {
+                            guard let source = dict[JSONKeys.Word] as? String,
+                                grid = dict[JSONKeys.CharacterGrid] as? [[String]],
+                                locations = dict[JSONKeys.WordLocations]?.allKeys as? [String] else {
                                 continue
                             }
                             
-                            guard let gameBoard = GameBoard(withSourceWord: source, characterGrid: grid, answerLocations: Array(answerDict.keys)) else {
+                            guard let gameBoard = GameBoard(withSourceWord: source, characterGrid: grid, answerLocations: locations) else {
                                 continue
                             }
                             

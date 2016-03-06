@@ -18,6 +18,10 @@
 		735E5AD81C89F8BD00E57F70 /* GameBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735E5AD71C89F8BD00E57F70 /* GameBoardView.swift */; };
 		735E5ADA1C8A050000E57F70 /* GameBoardDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735E5AD91C8A050000E57F70 /* GameBoardDataSource.swift */; };
 		735E5ADC1C8A101600E57F70 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735E5ADB1C8A101600E57F70 /* Queue.swift */; };
+		735E5B1C1C8CB59D00E57F70 /* Test1.json in Resources */ = {isa = PBXBuildFile; fileRef = 735E5B1B1C8CB59D00E57F70 /* Test1.json */; };
+		735E5B1F1C8CBCFF00E57F70 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735E5B1E1C8CBCFF00E57F70 /* Constants.swift */; };
+		735E5B201C8CBCFF00E57F70 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735E5B1E1C8CBCFF00E57F70 /* Constants.swift */; };
+		735E5B221C8CCA2D00E57F70 /* Test2.json in Resources */ = {isa = PBXBuildFile; fileRef = 735E5B211C8CCA2D00E57F70 /* Test2.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +59,9 @@
 		735E5AD71C89F8BD00E57F70 /* GameBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoardView.swift; sourceTree = "<group>"; };
 		735E5AD91C8A050000E57F70 /* GameBoardDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoardDataSource.swift; sourceTree = "<group>"; };
 		735E5ADB1C8A101600E57F70 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		735E5B1B1C8CB59D00E57F70 /* Test1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Test1.json; path = ../Duolingo/Test1.json; sourceTree = "<group>"; };
+		735E5B1E1C8CBCFF00E57F70 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		735E5B211C8CCA2D00E57F70 /* Test2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Test2.json; path = ../Duolingo/Test2.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +122,7 @@
 				735E5AD71C89F8BD00E57F70 /* GameBoardView.swift */,
 				735E5AD91C8A050000E57F70 /* GameBoardDataSource.swift */,
 				735E5ADB1C8A101600E57F70 /* Queue.swift */,
+				735E5B1E1C8CBCFF00E57F70 /* Constants.swift */,
 			);
 			path = Duolingo;
 			sourceTree = "<group>";
@@ -122,6 +130,8 @@
 		735E5AB71C89F75500E57F70 /* DuolingoTests */ = {
 			isa = PBXGroup;
 			children = (
+				735E5B1B1C8CB59D00E57F70 /* Test1.json */,
+				735E5B211C8CCA2D00E57F70 /* Test2.json */,
 				735E5AB81C89F75500E57F70 /* DuolingoTests.swift */,
 				735E5ABA1C89F75500E57F70 /* Info.plist */,
 			);
@@ -205,6 +215,7 @@
 				TargetAttributes = {
 					735E5A9F1C89F75500E57F70 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = K672Z5FPJS;
 					};
 					735E5AB31C89F75500E57F70 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -251,6 +262,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				735E5B221C8CCA2D00E57F70 /* Test2.json in Resources */,
+				735E5B1C1C8CB59D00E57F70 /* Test1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +285,7 @@
 				735E5ADC1C8A101600E57F70 /* Queue.swift in Sources */,
 				735E5ADA1C8A050000E57F70 /* GameBoardDataSource.swift in Sources */,
 				735E5AD61C89F8AC00E57F70 /* GameBoard.swift in Sources */,
+				735E5B1F1C8CBCFF00E57F70 /* Constants.swift in Sources */,
 				735E5AA41C89F75500E57F70 /* AppDelegate.swift in Sources */,
 				735E5AD81C89F8BD00E57F70 /* GameBoardView.swift in Sources */,
 			);
@@ -282,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				735E5AB91C89F75500E57F70 /* DuolingoTests.swift in Sources */,
+				735E5B201C8CBCFF00E57F70 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,10 +430,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Duolingo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = vanlenguyen.Duolingo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -427,10 +445,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Duolingo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = vanlenguyen.Duolingo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

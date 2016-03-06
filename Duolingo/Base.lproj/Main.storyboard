@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVi-EK-Sag">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVi-EK-Sag">
                                 <rect key="frame" x="261" y="285" width="78" height="30"/>
                                 <state key="normal" title="Start Game"/>
                                 <connections>
@@ -110,12 +110,20 @@
                                     <outletCollection property="gestureRecognizers" destination="veb-vk-17k" appends="YES" id="9TG-1n-M0J"/>
                                 </connections>
                             </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="232-C4-wc0">
+                                <rect key="frame" x="282" y="281" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="232-C4-wc0" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="7hZ-9D-dZ2"/>
                             <constraint firstItem="kio-vz-nZy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8QN-2G-l6N"/>
+                            <constraint firstItem="232-C4-wc0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FA0-RR-NqQ"/>
                             <constraint firstItem="dVX-9I-ZBK" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="KQB-sA-cKe"/>
+                            <constraint firstItem="232-C4-wc0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="P53-1i-DaI"/>
                             <constraint firstItem="kio-vz-nZy" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="49" id="V39-NN-NUb"/>
+                            <constraint firstItem="232-C4-wc0" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="axG-2Q-XOi"/>
                             <constraint firstItem="dVX-9I-ZBK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ct4-WE-Ywi"/>
                             <constraint firstItem="dVX-9I-ZBK" firstAttribute="top" secondItem="kio-vz-nZy" secondAttribute="bottom" constant="36" id="dRW-OT-65O"/>
                             <constraint firstItem="dVX-9I-ZBK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="keS-YL-RdC"/>
@@ -135,6 +143,10 @@
                                 <exclude reference="V39-NN-NUb"/>
                                 <exclude reference="t7s-Pp-FgR"/>
                                 <exclude reference="vIV-Sk-mwZ"/>
+                                <exclude reference="7hZ-9D-dZ2"/>
+                                <exclude reference="FA0-RR-NqQ"/>
+                                <exclude reference="P53-1i-DaI"/>
+                                <exclude reference="axG-2Q-XOi"/>
                                 <exclude reference="rMJ-fp-gle"/>
                             </mask>
                         </variation>
@@ -145,6 +157,8 @@
                                 <include reference="tga-w3-8TT"/>
                                 <include reference="t7s-Pp-FgR"/>
                                 <include reference="vIV-Sk-mwZ"/>
+                                <include reference="P53-1i-DaI"/>
+                                <include reference="axG-2Q-XOi"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -153,11 +167,14 @@
                                 <include reference="dRW-OT-65O"/>
                                 <include reference="8QN-2G-l6N"/>
                                 <include reference="V39-NN-NUb"/>
+                                <include reference="7hZ-9D-dZ2"/>
+                                <include reference="FA0-RR-NqQ"/>
                                 <include reference="rMJ-fp-gle"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="232-C4-wc0" id="Ss6-qI-VBO"/>
                         <outlet property="gameBoardView" destination="dVX-9I-ZBK" id="S9Z-k9-5Gx"/>
                         <outlet property="sourceWordLabel" destination="kio-vz-nZy" id="Fqt-yH-TiM"/>
                     </connections>

@@ -12,6 +12,7 @@ class ViewController: UIViewController, GameBoardViewDelegate {
     
     @IBOutlet weak var sourceWordLabel: UILabel!
     @IBOutlet weak var gameBoardView: GameBoardView!
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
     private let dataSource = GameBoardDataSource()
     private var currentGameBoard: GameBoard?
@@ -22,9 +23,11 @@ class ViewController: UIViewController, GameBoardViewDelegate {
         
         self.gameBoardView.delegate = self
         
+        self.activityIndicatorView.startAnimating()
         dataSource.fetchGameBoardData { [weak self] () -> Void in
             if let strongSelf = self {
                 strongSelf.loadNextGameBoard()
+                strongSelf.activityIndicatorView.stopAnimating()
             }
         }
     }
