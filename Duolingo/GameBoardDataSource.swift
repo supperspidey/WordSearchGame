@@ -38,7 +38,6 @@ class GameBoardDataSource: NSObject {
                 let results = result.componentsSeparatedByString("\n")
                 for jsonString in results {
                     guard let gameData = jsonString.dataUsingEncoding(NSUTF8StringEncoding) else {
-                        print("failure!")
                         continue
                     }
                     
@@ -50,11 +49,14 @@ class GameBoardDataSource: NSObject {
                         }
                         
                         if let strongSelf = self {
-                            guard let source = dict["word"] as? String, grid = dict["character_grid"] as? [[String]] else {
+                            guard let source = dict["word"] as? String,
+                                grid = dict["character_grid"] as? [[String]],
+                                answerDict = dict["word_locations"] as? [String: String] else {
                                 continue
                             }
                             
-                            guard let gameBoard = GameBoard(withSourceWord: source, characterGrid: grid) else {
+                            let locations = strongSelf.convertToGridCoordinates(coordinatesString: Array(answerDict.keys)[0])
+                            guard let gameBoard = GameBoard(withSourceWord: source, characterGrid: grid, answerLocations: locations) else {
                                 continue
                             }
                             
@@ -75,6 +77,18 @@ class GameBoardDataSource: NSObject {
             }
         }
         task.resume()
+    }
+    
+    private func convertToGridCoordinates(coordinatesString string: String) -> [GridCoordinate] {
+        let array = string.componentsSeparatedByString(",")
+        var locations = [GridCoordinate]()
+        for i in 0.stride(through: array.count-1, by: 2) {
+            if let row = UInt(array[i+1]), col = UInt(array[i]) {
+                locations.append(GridCoordinate(row: row, col: col))
+            }
+        }
+        
+        return locations
     }
     
     func revealNextGame() -> GameBoard? {

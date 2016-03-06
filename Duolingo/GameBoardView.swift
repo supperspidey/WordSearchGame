@@ -16,14 +16,22 @@ struct GridCoordinate {
 
 protocol GameBoardViewDelegate: class {
     func dimensionOfGrid() -> [UInt]?
-    func gameBoardViewDidFinishSelectingCharacters() -> Void
+    func gameBoardViewDidFinishSelectingCharacters(atCoordinates coords: [GridCoordinate]?) -> Void
 }
 
 class GameBoardView: UIView {
     
+    enum HighlightDirection {
+        case Horizontal
+        case Vertical
+        case Diagonal
+        case Undefined
+    }
+    
     private var selectedColor: UIColor
     private var unselectedColor: UIColor
     private var initialGridCoordinate: GridCoordinate?
+    private var finalGridCoordinate: GridCoordinate?
     
     weak var delegate: GameBoardViewDelegate?
     
@@ -58,10 +66,73 @@ class GameBoardView: UIView {
                     return
                 }
                 
+                self.finalGridCoordinate = coord
                 self.highlightPath(initialCoordinate: initialCoord, finalCoordinate: coord)
             }
         } else if panGesture.state == .Ended {
-            self.delegate?.gameBoardViewDidFinishSelectingCharacters()
+            let visitedCoords = self.generateVisitedCoordinates()
+            self.delegate?.gameBoardViewDidFinishSelectingCharacters(atCoordinates: visitedCoords)
+        }
+    }
+    
+    private func generateVisitedCoordinates() -> [GridCoordinate]? {
+        guard let initialCoord = self.initialGridCoordinate, finalCoord = self.finalGridCoordinate else {
+            return nil
+        }
+        
+        let direction = self.determineDirection(initialCoordinate: initialCoord, finalCoordinate: finalCoord)
+        
+        switch direction {
+            
+        case .Horizontal:
+            let step = Int(finalCoord.col) - Int(initialCoord.col) > 0 ? 1 : -1
+            var coords = [GridCoordinate]()
+            for col in initialCoord.col.stride(through: finalCoord.col, by: step) {
+                coords.append(GridCoordinate(row: initialCoord.row, col: col))
+            }
+            return coords
+            
+        case .Vertical:
+            let step = Int(finalCoord.row) - Int(initialCoord.row) > 0 ? 1 : -1
+            var coords = [GridCoordinate]()
+            for row in initialCoord.row.stride(through: finalCoord.row, by: step) {
+                coords.append(GridCoordinate(row: row, col: initialCoord.col))
+            }
+            return coords
+            
+        case .Diagonal:
+            let rowStep = Int(finalCoord.row) - Int(initialCoord.row) > 0 ? 1 : -1
+            let colStep = Int(finalCoord.col) - Int(initialCoord.col) > 0 ? 1 : -1
+            var coords = [GridCoordinate]()
+            var row: UInt = initialCoord.row
+            var col: UInt = initialCoord.col
+            while row != finalCoord.row && col != finalCoord.col {
+                coords.append(GridCoordinate(row: row, col: col))
+                row = UInt(Int(row) + rowStep)
+                col = UInt(Int(col) + colStep)
+                
+                if row == finalCoord.row && col == finalCoord.col {
+                    self.highlightCharacter(atCoordinate: GridCoordinate(row: row, col: col))
+                }
+            }
+            return coords
+            
+        default:
+            return nil
+            
+        }
+    }
+    
+    private func determineDirection(initialCoordinate initialCoord: GridCoordinate,
+        finalCoordinate finalCoord: GridCoordinate) -> HighlightDirection {
+        if finalCoord.row == initialCoord.row {
+            return .Horizontal
+        } else if finalCoord.col == initialCoord.col {
+            return .Vertical
+        } else if abs(Int(finalCoord.row) - Int(initialCoord.row)) == abs(Int(finalCoord.col) - Int(initialCoord.col)) {
+            return .Diagonal
+        } else {
+            return .Undefined
         }
     }
     
@@ -74,44 +145,28 @@ class GameBoardView: UIView {
     private func highlightPath(initialCoordinate initialCoord: GridCoordinate, finalCoordinate finalCoord: GridCoordinate) {
         // TODO: optimize this part. Save the path to an array, and only deselect views that are not in the path
         self.unhighlightAllCharacters()
+        let direction = self.determineDirection(initialCoordinate: initialCoord, finalCoordinate: finalCoord)
         
-        if finalCoord.row == initialCoord.row {
-            var step = 0
-            if Int(finalCoord.col) - Int(initialCoord.col) > 0 {
-                step = 1
-            } else {
-                step = -1
-            }
+        switch direction {
+            
+        case .Horizontal:
+            let step = Int(finalCoord.col) - Int(initialCoord.col) > 0 ? 1 : -1
             
             for col in initialCoord.col.stride(through: finalCoord.col, by: step) {
                 self.highlightCharacter(atCoordinate: GridCoordinate(row: initialCoord.row, col: col))
             }
-        } else if finalCoord.col == initialCoord.col {
-            var step = 0
-            if Int(finalCoord.row) - Int(initialCoord.row) > 0 {
-                step = 1
-            } else {
-                step = -1
-            }
             
+        case .Vertical:
+            let step = Int(finalCoord.row) - Int(initialCoord.row) > 0 ? 1 : -1
+
             for row in initialCoord.row.stride(through: finalCoord.row, by: step) {
                 self.highlightCharacter(atCoordinate: GridCoordinate(row: row, col: initialCoord.col))
             }
-        } else if abs(Int(finalCoord.row) - Int(initialCoord.row)) == abs(Int(finalCoord.col) - Int(initialCoord.col)) {
-            var rowStep: Int = 0
-            var colStep: Int = 0
-            if Int(finalCoord.row) - Int(initialCoord.row) > 0 {
-                rowStep = 1
-            } else {
-                rowStep = -1
-            }
             
-            if Int(finalCoord.col) - Int(initialCoord.col) > 0 {
-                colStep = 1
-            } else {
-                colStep = -1
-            }
-            
+        case .Diagonal:
+            let rowStep = Int(finalCoord.row) - Int(initialCoord.row) > 0 ? 1 : -1
+            let colStep = Int(finalCoord.col) - Int(initialCoord.col) > 0 ? 1 : -1
+
             var row: UInt = initialCoord.row
             var col: UInt = initialCoord.col
             while row != finalCoord.row && col != finalCoord.col {
@@ -123,7 +178,8 @@ class GameBoardView: UIView {
                     self.highlightCharacter(atCoordinate: GridCoordinate(row: row, col: col))
                 }
             }
-        } else {
+            
+        default:
             return
         }
     }

@@ -85,8 +85,18 @@ class ViewController: UIViewController, GameBoardViewDelegate {
         return self.currentGameBoard?.gridSize
     }
     
-    func gameBoardViewDidFinishSelectingCharacters() {
+    func gameBoardViewDidFinishSelectingCharacters(atCoordinates coords: [GridCoordinate]?) {
         self.gameBoardView.unhighlightAllCharacters()
+        
+        guard let visitedCoords = coords, gameBoard = self.currentGameBoard else {
+            return
+        }
+        
+        if gameBoard.checkAnswer(withCoordinates: visitedCoords) {
+            print("Yes!")
+        } else {
+            print("No!")
+        }
     }
 
     override func didReceiveMemoryWarning() {
