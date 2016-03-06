@@ -55,8 +55,7 @@ class GameBoardDataSource: NSObject {
                                 continue
                             }
                             
-                            let locations = strongSelf.convertToGridCoordinates(coordinatesStrings: Array(answerDict.keys))
-                            guard let gameBoard = GameBoard(withSourceWord: source, characterGrid: grid, answerLocations: locations) else {
+                            guard let gameBoard = GameBoard(withSourceWord: source, characterGrid: grid, answerLocations: Array(answerDict.keys)) else {
                                 continue
                             }
                             
@@ -77,20 +76,6 @@ class GameBoardDataSource: NSObject {
             }
         }
         task.resume()
-    }
-    
-    private func convertToGridCoordinates(coordinatesStrings strings: [String]) -> [[GridCoordinate]] {
-        var locations = [[GridCoordinate]](count: strings.count, repeatedValue: [])
-        for (index, string) in strings.enumerate() {
-            let array = string.componentsSeparatedByString(",")
-            for i in 0.stride(through: array.count-1, by: 2) {
-                if let row = UInt(array[i+1]), col = UInt(array[i]) {
-                    locations[index].append(GridCoordinate(row: row, col: col))
-                }
-            }
-        }
-        
-        return locations
     }
     
     func revealNextGame() -> GameBoard? {

@@ -34,6 +34,8 @@ class ViewController: UIViewController, GameBoardViewDelegate {
             return
         }
         
+        self.gameBoardView.clearView()
+        
         for subview in self.gameBoardView.subviews {
             subview.removeFromSuperview()
         }
@@ -90,17 +92,55 @@ class ViewController: UIViewController, GameBoardViewDelegate {
     }
     
     func gameBoardViewDidFinishSelectingCharacters(atCoordinates coords: [GridCoordinate]?) {
-        self.gameBoardView.unhighlightAllCharacters()
-        
         guard let visitedCoords = coords, gameBoard = self.currentGameBoard else {
             return
         }
         
-        if gameBoard.checkAnswer(withCoordinates: visitedCoords) {
-            self.loadNextGameBoard()
-        } else {
-            print("No!")
+        let coordsStr = self.generateString(fromCoordinates: visitedCoords)
+        
+        guard let evaluated = gameBoard.isEvaluated(withCoordinates: coordsStr) else {
+            return
         }
+        
+        if evaluated {
+            return
+        } else {
+            if gameBoard.checkAnswer(withCoordinates: coordsStr) {
+                let realCoords = self.generateGridCoordinates(fromString: coordsStr)
+                if gameBoard.isFinished() {
+                    self.loadNextGameBoard()
+                } else {
+                    self.gameBoardView.remember(correctPath: realCoords)
+                }
+            } else {
+                self.gameBoardView.unhighlightSelectedCharacters()
+            }
+        }
+    }
+    
+    private func generateString(fromCoordinates coords: [GridCoordinate]) -> String {
+        var string = ""
+        for (i, coord) in coords.enumerate() {
+            if i < coords.count - 1 {
+                string += (String(coord.col) + "," + String(coord.row) + ",")
+            } else {
+                string += (String(coord.col) + "," + String(coord.row))
+            }
+        }
+        
+        return string
+    }
+    
+    private func generateGridCoordinates(fromString coordsStr: String) -> [GridCoordinate] {
+        let array = coordsStr.componentsSeparatedByString(",")
+        var coords = [GridCoordinate]()
+        for i in 0.stride(through: array.count-1, by: 2) {
+            guard let row = UInt(array[i+1]), col = UInt(array[i]) else {
+                continue
+            }
+            coords.append(GridCoordinate(row: row, col: col))
+        }
+        return coords
     }
 
     override func didReceiveMemoryWarning() {

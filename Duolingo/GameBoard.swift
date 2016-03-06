@@ -12,39 +12,49 @@ class GameBoard {
     private(set) var sourceWord: String?
     private(set) var characterGrid: [[String]]?
     private(set) var gridSize: [UInt]?
-    private(set) var answerLocations: [[GridCoordinate]]?
+    private(set) var answerLocations: [String]?
+    private var checkList: [String: Bool]?
     
-    init?(withSourceWord source: String?, characterGrid: [[String]]?, answerLocations: [[GridCoordinate]]?) {
-        guard let theSource = source, theCharacterGrid = characterGrid else {
+    init?(withSourceWord source: String?, characterGrid: [[String]]?, answerLocations: [String]?) {
+        guard let theSource = source, theCharacterGrid = characterGrid, locations = answerLocations else {
             return nil
         }
         
         self.sourceWord = theSource
         self.characterGrid = theCharacterGrid
         self.gridSize = [UInt(theCharacterGrid.count), UInt(theCharacterGrid.count)]
-        self.answerLocations = answerLocations
+        self.answerLocations = locations
+        self.checkList = [String: Bool]()
     }
     
-    func checkAnswer(withCoordinates coords: [GridCoordinate]?) -> Bool {
+    func checkAnswer(withCoordinates coords: String?) -> Bool {
         guard let theCoords = coords, correctCoordsSet = self.answerLocations else {
             return false
         }
         
-        var potentialCorrectIndex = 0
-        for (index, correctCoords) in correctCoordsSet.enumerate() {
-            if theCoords.count == correctCoords.count {
-                potentialCorrectIndex = index
-                break
+        for locations in correctCoordsSet {
+            if theCoords == locations {
+                self.checkList?[theCoords] = true
+                return true
             }
         }
         
-        for (index, coord) in theCoords.enumerate() {
-            let correctCoord = correctCoordsSet[potentialCorrectIndex][index]
-            if coord.col != correctCoord.col || coord.row != correctCoord.row {
-                return false
-            }
+        return false
+    }
+    
+    func isEvaluated(withCoordinates coords: String?) -> Bool? {
+        guard let theCoords = coords, theCheckList = checkList else {
+            return nil
+        }
+        
+        guard let _ = theCheckList[theCoords] else {
+            return false
         }
         
         return true
+    }
+    
+    func isFinished() -> Bool {
+        return self.answerLocations?.count == self.checkList?.count
     }
 }

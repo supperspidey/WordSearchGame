@@ -32,12 +32,14 @@ class GameBoardView: UIView {
     private var unselectedColor: UIColor
     private var initialGridCoordinate: GridCoordinate?
     private var finalGridCoordinate: GridCoordinate?
+    private var correctPaths: [[GridCoordinate]]
     
     weak var delegate: GameBoardViewDelegate?
     
     required init?(coder aDecoder: NSCoder) {
         self.selectedColor = UIColor.grayColor()
         self.unselectedColor = UIColor.whiteColor()
+        self.correctPaths = []
         
         super.init(coder: aDecoder)
     }
@@ -136,15 +138,98 @@ class GameBoardView: UIView {
         }
     }
     
+    func clearView() {
+        self.unhighlightAllCharacters()
+        correctPaths.removeAll()
+    }
+    
     func unhighlightAllCharacters() {
         for view in self.subviews {
             view.backgroundColor = unselectedColor
         }
     }
     
+    private func unhighlightAllCharactersExceptTheOnesInCorrectPaths() {
+        var indicesToHighlight = [Int]()
+        
+        guard let gridDimension = delegate?.dimensionOfGrid() else {
+            return
+        }
+        
+        for path in self.correctPaths {
+            for coord in path {
+                indicesToHighlight.append(self.convert(coordinate: coord, toIndexWithGridDimension: gridDimension))
+            }
+        }
+        
+        for (i, subview) in self.subviews.enumerate() {
+            if indicesToHighlight.contains(i) {
+                subview.backgroundColor = self.selectedColor
+            } else {
+                subview.backgroundColor = self.unselectedColor
+            }
+        }
+    }
+    
+    func unhighlightSelectedCharacters() {
+        guard let initialCoord = self.initialGridCoordinate, finalCoord = self.finalGridCoordinate else {
+            return
+        }
+        
+        self.unhighlightPath(initialCoordinate: initialCoord, finalCoordinate: finalCoord)
+    }
+    
+    private func unhighlightPath(initialCoordinate initialCoord: GridCoordinate, finalCoordinate finalCoord: GridCoordinate) {
+        let direction = self.determineDirection(initialCoordinate: initialCoord, finalCoordinate: finalCoord)
+        
+        switch direction {
+            
+        case .Horizontal:
+            let step = Int(finalCoord.col) - Int(initialCoord.col) > 0 ? 1 : -1
+            
+            for col in initialCoord.col.stride(through: finalCoord.col, by: step) {
+                self.unhighlightCharacter(atCoordinate: GridCoordinate(row: initialCoord.row, col: col))
+            }
+            
+            self.unhighlightAllCharactersExceptTheOnesInCorrectPaths()
+            
+        case .Vertical:
+            let step = Int(finalCoord.row) - Int(initialCoord.row) > 0 ? 1 : -1
+            
+            for row in initialCoord.row.stride(through: finalCoord.row, by: step) {
+                self.unhighlightCharacter(atCoordinate: GridCoordinate(row: row, col: initialCoord.col))
+            }
+            
+            self.unhighlightAllCharactersExceptTheOnesInCorrectPaths()
+            
+        case .Diagonal:
+            let rowStep = Int(finalCoord.row) - Int(initialCoord.row) > 0 ? 1 : -1
+            let colStep = Int(finalCoord.col) - Int(initialCoord.col) > 0 ? 1 : -1
+            
+            var row: UInt = initialCoord.row
+            var col: UInt = initialCoord.col
+            while row != finalCoord.row && col != finalCoord.col {
+                self.unhighlightCharacter(atCoordinate: GridCoordinate(row: row, col: col))
+                row = UInt(Int(row) + rowStep)
+                col = UInt(Int(col) + colStep)
+                
+                if row == finalCoord.row && col == finalCoord.col {
+                    self.unhighlightCharacter(atCoordinate: GridCoordinate(row: row, col: col))
+                }
+            }
+            
+            self.unhighlightAllCharactersExceptTheOnesInCorrectPaths()
+            
+        default:
+            self.unhighlightAllCharactersExceptTheOnesInCorrectPaths()
+            return
+        }
+    }
+    
     private func highlightPath(initialCoordinate initialCoord: GridCoordinate, finalCoordinate finalCoord: GridCoordinate) {
         // TODO: optimize this part. Save the path to an array, and only deselect views that are not in the path
-        self.unhighlightAllCharacters()
+        self.unhighlightAllCharactersExceptTheOnesInCorrectPaths()
+        
         let direction = self.determineDirection(initialCoordinate: initialCoord, finalCoordinate: finalCoord)
         
         switch direction {
@@ -155,6 +240,7 @@ class GameBoardView: UIView {
             for col in initialCoord.col.stride(through: finalCoord.col, by: step) {
                 self.highlightCharacter(atCoordinate: GridCoordinate(row: initialCoord.row, col: col))
             }
+//            self.unhighlightAllCharactersExceptTheOnesInCorrectPaths()
             
         case .Vertical:
             let step = Int(finalCoord.row) - Int(initialCoord.row) > 0 ? 1 : -1
@@ -162,6 +248,7 @@ class GameBoardView: UIView {
             for row in initialCoord.row.stride(through: finalCoord.row, by: step) {
                 self.highlightCharacter(atCoordinate: GridCoordinate(row: row, col: initialCoord.col))
             }
+//            self.unhighlightAllCharactersExceptTheOnesInCorrectPaths()
             
         case .Diagonal:
             let rowStep = Int(finalCoord.row) - Int(initialCoord.row) > 0 ? 1 : -1
@@ -178,6 +265,7 @@ class GameBoardView: UIView {
                     self.highlightCharacter(atCoordinate: GridCoordinate(row: row, col: col))
                 }
             }
+//            self.unhighlightAllCharactersExceptTheOnesInCorrectPaths()
             
         default:
             return
@@ -200,6 +288,10 @@ class GameBoardView: UIView {
         return self.convert(index: UInt(index), toCoordinateInGridWithDimension: gridDimension)
     }
     
+    private func convert(coordinate coord: GridCoordinate, toIndexWithGridDimension dimension: [UInt]) -> Int {
+        return Int(coord.row * dimension[0] + coord.col)
+    }
+    
     private func convert(index index: UInt, toCoordinateInGridWithDimension dimension: [UInt]) -> GridCoordinate {
         return GridCoordinate(row: index / dimension[0], col: index % dimension[1])
     }
@@ -216,6 +308,19 @@ class GameBoardView: UIView {
     private func highlightCharacter(atCoordinate coord: GridCoordinate) {
         let view = self.viewAtGridCoordinate(coordinate: coord)
         view?.backgroundColor = self.selectedColor
+    }
+    
+    private func unhighlightCharacter(atCoordinate coord: GridCoordinate) {
+        let view = self.viewAtGridCoordinate(coordinate: coord)
+        view?.backgroundColor = self.unselectedColor
+    }
+    
+    func remember(correctPath path: [GridCoordinate]?) {
+        guard let thePath = path else {
+            return
+        }
+        
+        self.correctPaths.append(thePath)
     }
     
     override func didAddSubview(subview: UIView) {
