@@ -155,7 +155,7 @@ class ViewController: UIViewController, GameBoardViewDelegate {
         }
         
         if evaluated {
-            return
+            self.gameBoardView.unhighlightSelectedCharacters()
         } else {
             if let isCorrect = gameBoard.checkAnswer(withCoordinates: coordsStr) {
                 if isCorrect {

@@ -28,8 +28,14 @@ class GameBoardView: UIView {
         case Undefined
     }
     
+    enum HighlightOptions {
+        case Selected
+        case Correct
+    }
+    
     private var selectedColor: UIColor
     private var unselectedColor: UIColor
+    private var correctColor: UIColor
     private var initialGridCoordinate: GridCoordinate?
     private var finalGridCoordinate: GridCoordinate?
     private var previousFinalGridCoordinate: GridCoordinate?
@@ -40,6 +46,7 @@ class GameBoardView: UIView {
     required init?(coder aDecoder: NSCoder) {
         self.selectedColor = UIColor.grayColor()
         self.unselectedColor = UIColor.whiteColor()
+        self.correctColor = UIColor.greenColor()
         self.correctPaths = []
         
         super.init(coder: aDecoder)
@@ -132,7 +139,6 @@ class GameBoardView: UIView {
                 col = UInt(Int(col) + colStep)
                 
                 if row == finalCoord.row && col == finalCoord.col {
-                    self.highlightCharacter(atCoordinate: GridCoordinate(row: row, col: col))
                     coords.append(GridCoordinate(row: row, col: col))
                 }
             }
@@ -226,7 +232,7 @@ class GameBoardView: UIView {
     private func highlightCorrectPaths() {
         for path in self.correctPaths {
             for coord in path {
-                self.highlightCharacter(atCoordinate: coord)
+                self.highlightCharacter(atCoordinate: coord, withMode: .Correct)
             }
         }
     }
@@ -245,14 +251,14 @@ class GameBoardView: UIView {
             let step = Int(finalCoord.col) - Int(initialCoord.col) > 0 ? 1 : -1
             
             for col in initialCoord.col.stride(through: finalCoord.col, by: step) {
-                self.highlightCharacter(atCoordinate: GridCoordinate(row: initialCoord.row, col: col))
+                self.highlightCharacter(atCoordinate: GridCoordinate(row: initialCoord.row, col: col), withMode: .Selected)
             }
             
         case .Vertical:
             let step = Int(finalCoord.row) - Int(initialCoord.row) > 0 ? 1 : -1
 
             for row in initialCoord.row.stride(through: finalCoord.row, by: step) {
-                self.highlightCharacter(atCoordinate: GridCoordinate(row: row, col: initialCoord.col))
+                self.highlightCharacter(atCoordinate: GridCoordinate(row: row, col: initialCoord.col), withMode: .Selected)
             }
             
         case .Diagonal:
@@ -262,12 +268,12 @@ class GameBoardView: UIView {
             var row: UInt = initialCoord.row
             var col: UInt = initialCoord.col
             while row != finalCoord.row && col != finalCoord.col {
-                self.highlightCharacter(atCoordinate: GridCoordinate(row: row, col: col))
+                self.highlightCharacter(atCoordinate: GridCoordinate(row: row, col: col), withMode: .Selected)
                 row = UInt(Int(row) + rowStep)
                 col = UInt(Int(col) + colStep)
                 
                 if row == finalCoord.row && col == finalCoord.col {
-                    self.highlightCharacter(atCoordinate: GridCoordinate(row: row, col: col))
+                    self.highlightCharacter(atCoordinate: GridCoordinate(row: row, col: col), withMode: .Selected)
                 }
             }
             
@@ -309,9 +315,16 @@ class GameBoardView: UIView {
         return self.subviews[index]
     }
     
-    private func highlightCharacter(atCoordinate coord: GridCoordinate) {
+    private func highlightCharacter(atCoordinate coord: GridCoordinate, withMode mode: HighlightOptions) {
         let view = self.viewAtGridCoordinate(coordinate: coord)
-        view?.backgroundColor = self.selectedColor
+        var color: UIColor
+        switch mode {
+        case .Correct:
+            color = self.correctColor
+        default:
+            color = self.selectedColor
+        }
+        view?.backgroundColor = color
     }
     
     private func unhighlightCharacter(atCoordinate coord: GridCoordinate) {
@@ -325,5 +338,6 @@ class GameBoardView: UIView {
         }
         
         self.correctPaths.append(thePath)
+        self.highlightCorrectPaths()
     }
 }
