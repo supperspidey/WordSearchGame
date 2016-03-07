@@ -27,11 +27,7 @@ class GameBoardDataSource: NSObject {
         let task = session.dataTaskWithRequest(urlRequest) {
             [weak self] (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
             if error == nil {
-                guard let theData = data else {
-                    return
-                }
-                
-                guard let result = NSString(data: theData, encoding: NSUTF8StringEncoding) else {
+                guard let theData = data, result = NSString(data: theData, encoding: NSUTF8StringEncoding) else {
                     return
                 }
                 

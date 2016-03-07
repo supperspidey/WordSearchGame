@@ -27,9 +27,9 @@ class GameBoard {
         self.checkList = [String: Bool]()
     }
     
-    func checkAnswer(withCoordinates coords: String?) -> Bool {
+    func checkAnswer(withCoordinates coords: String?) -> Bool? {
         guard let theCoords = coords, correctCoordsSet = self.answerLocations else {
-            return false
+            return nil
         }
         
         for locations in correctCoordsSet {

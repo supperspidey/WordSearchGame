@@ -17,6 +17,8 @@ class ViewController: UIViewController, GameBoardViewDelegate {
     private let dataSource = GameBoardDataSource()
     private var currentGameBoard: GameBoard?
     
+    // MARK: View controller's life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -48,6 +50,8 @@ class ViewController: UIViewController, GameBoardViewDelegate {
             self.layoutSubviewsInGameBoardView(gridDimension: gridSize)
             }, completion: nil)
     }
+    
+    // MARK: Helper methods
     
     private func loadNextGameBoard() -> Void {
         guard let gameBoard = dataSource.revealNextGame() else {
@@ -108,37 +112,6 @@ class ViewController: UIViewController, GameBoardViewDelegate {
         }
     }
     
-    func dimensionOfGrid() -> [UInt]? {
-        return self.currentGameBoard?.gridSize
-    }
-    
-    func gameBoardViewDidFinishSelectingCharacters(atCoordinates coords: [GridCoordinate]?) {
-        guard let visitedCoords = coords, gameBoard = self.currentGameBoard else {
-            return
-        }
-        
-        let coordsStr = self.generateString(fromCoordinates: visitedCoords)
-        
-        guard let evaluated = gameBoard.isEvaluated(withCoordinates: coordsStr) else {
-            return
-        }
-        
-        if evaluated {
-            return
-        } else {
-            if gameBoard.checkAnswer(withCoordinates: coordsStr) {
-                let realCoords = self.generateGridCoordinates(fromString: coordsStr)
-                if gameBoard.isFinished() {
-                    self.loadNextGameBoard()
-                } else {
-                    self.gameBoardView.remember(correctPath: realCoords)
-                }
-            } else {
-                self.gameBoardView.unhighlightSelectedCharacters()
-            }
-        }
-    }
-    
     private func generateString(fromCoordinates coords: [GridCoordinate]) -> String {
         var string = ""
         for (i, coord) in coords.enumerate() {
@@ -163,6 +136,42 @@ class ViewController: UIViewController, GameBoardViewDelegate {
         }
         return coords
     }
-
+    
+    // MARK: GameBoardView's delegate methods
+    
+    func dimensionOfGrid() -> [UInt]? {
+        return self.currentGameBoard?.gridSize
+    }
+    
+    func gameBoardViewDidFinishSelectingCharacters(atCoordinates coords: [GridCoordinate]?) {
+        guard let visitedCoords = coords, gameBoard = self.currentGameBoard else {
+            return
+        }
+        
+        let coordsStr = self.generateString(fromCoordinates: visitedCoords)
+        
+        guard let evaluated = gameBoard.isEvaluated(withCoordinates: coordsStr) else {
+            return
+        }
+        
+        if evaluated {
+            return
+        } else {
+            if let isCorrect = gameBoard.checkAnswer(withCoordinates: coordsStr) {
+                if isCorrect {
+                    let realCoords = self.generateGridCoordinates(fromString: coordsStr)
+                    if gameBoard.isFinished() {
+                        self.loadNextGameBoard()
+                    } else {
+                        self.gameBoardView.remember(correctPath: realCoords)
+                    }
+                } else {
+                    self.gameBoardView.unhighlightSelectedCharacters()
+                }
+            } else {
+                return
+            }
+        }
+    }
 }
 

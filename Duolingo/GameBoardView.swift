@@ -45,6 +45,8 @@ class GameBoardView: UIView {
         super.init(coder: aDecoder)
     }
     
+    // MARK: Pan gesture's state machine handler
+    
     @IBAction func handlePanGesture(panGesture: UIPanGestureRecognizer) {
         if panGesture.state == .Began {
             // Get the pivot coordinate
@@ -83,6 +85,15 @@ class GameBoardView: UIView {
             self.delegate?.gameBoardViewDidFinishSelectingCharacters(atCoordinates: visitedCoords)
         }
     }
+    
+    // MARK: Polymorphism
+    
+    override func didAddSubview(subview: UIView) {
+        subview.userInteractionEnabled = true
+        subview.backgroundColor = unselectedColor
+    }
+    
+    // MARK: Helper methods
     
     private func generateVisitedCoordinates() -> [GridCoordinate]? {
         guard let initialCoord = self.initialGridCoordinate, finalCoord = self.finalGridCoordinate else {
@@ -226,7 +237,6 @@ class GameBoardView: UIView {
         }
         self.unhighlightPath(initialCoordinate: initialCoord, finalCoordinate: previousFinalCoord)
         
-        
         let direction = self.determineDirection(initialCoordinate: initialCoord, finalCoordinate: finalCoord)
         
         switch direction {
@@ -315,10 +325,5 @@ class GameBoardView: UIView {
         }
         
         self.correctPaths.append(thePath)
-    }
-    
-    override func didAddSubview(subview: UIView) {
-        subview.userInteractionEnabled = true
-        subview.backgroundColor = unselectedColor
     }
 }
