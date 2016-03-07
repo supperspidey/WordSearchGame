@@ -59,9 +59,9 @@
 		735E5AD71C89F8BD00E57F70 /* GameBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoardView.swift; sourceTree = "<group>"; };
 		735E5AD91C8A050000E57F70 /* GameBoardDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoardDataSource.swift; sourceTree = "<group>"; };
 		735E5ADB1C8A101600E57F70 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
-		735E5B1B1C8CB59D00E57F70 /* Test1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Test1.json; path = ../Duolingo/Test1.json; sourceTree = "<group>"; };
+		735E5B1B1C8CB59D00E57F70 /* Test1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Test1.json; sourceTree = "<group>"; };
 		735E5B1E1C8CBCFF00E57F70 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		735E5B211C8CCA2D00E57F70 /* Test2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Test2.json; path = ../Duolingo/Test2.json; sourceTree = "<group>"; };
+		735E5B211C8CCA2D00E57F70 /* Test2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Test2.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
