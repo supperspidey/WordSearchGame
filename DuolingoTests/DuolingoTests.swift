@@ -39,6 +39,17 @@ class DuolingoTests: XCTestCase {
         XCTAssertNil(gameBoard, "Test Failed: gameBoard without anything should have been invalid.")
     }
     
+    func testGameBoardCheckingAnswerNil() {
+        let gameBoard = GameBoard(
+            withSourceWord: nil,
+            characterGrid: nil,
+            answerLocations: nil
+        )
+        
+        let isCorrect = gameBoard?.checkAnswer(withCoordinates: ";klasdf,asdfo;asjdf;lajd;flk ;lasfdklw ")
+        XCTAssertNil(isCorrect, "Test Failed: calling checkAnswer on a nil game board should have been invalid.")
+    }
+    
     func testGameBoardCheckingAnswerTrue() {
         guard let jsonObj = self.getJSONGraph(fromFileName: "Test1", ofType: "json") as? NSDictionary else {
             return
@@ -58,7 +69,9 @@ class DuolingoTests: XCTestCase {
             return
         }
         
-        let isCorrect = gameBoard.checkAnswer(withCoordinates: "6,1,6,2,6,3,6,4,6,5,6,6")
+        guard let isCorrect = gameBoard.checkAnswer(withCoordinates: "6,1,6,2,6,3,6,4,6,5,6,6") else {
+            return
+        }
         XCTAssertTrue(isCorrect, "Test Failed: correct path should have been checked as `true`.")
     }
     
@@ -81,7 +94,9 @@ class DuolingoTests: XCTestCase {
                 return
         }
         
-        let isCorrect = gameBoard.checkAnswer(withCoordinates: ";laksdfa;lksdf,asfl,asdf,mawelfw;of")
+        guard let isCorrect = gameBoard.checkAnswer(withCoordinates: ";laksdfa;lksdf,asfl,asdf,mawelfw;of") else {
+            return
+        }
         XCTAssertFalse(isCorrect, "Test Failed: random string should have been checked as `false`.")
     }
     

@@ -22,4 +22,8 @@ struct Queue<Element> {
             return nil
         }
     }
+    
+    mutating func peek() -> Element? {
+        return items.first
+    }
 }

@@ -11,7 +11,7 @@ import UIKit
 class GameBoard {
     private(set) var sourceWord: String?
     private(set) var characterGrid: [[String]]?
-    private(set) var gridSize: [UInt]?
+    private(set) var gridSize: UInt?
     private(set) var answerLocations: [String]?
     private var checkList: [String: Bool]?
     
@@ -22,7 +22,7 @@ class GameBoard {
         
         self.sourceWord = theSource
         self.characterGrid = theCharacterGrid
-        self.gridSize = [UInt(theCharacterGrid.count), UInt(theCharacterGrid.count)]
+        self.gridSize = UInt(theCharacterGrid.count)
         self.answerLocations = locations
         self.checkList = [String: Bool]()
     }

@@ -15,8 +15,11 @@ struct GridCoordinate {
 }
 
 protocol GameBoardViewDelegate: class {
-    func dimensionOfGrid() -> [UInt]?
     func gameBoardViewDidFinishSelectingCharacters(atCoordinates coords: [GridCoordinate]?) -> Void
+}
+
+protocol GameBoardViewDataSource: class {
+    func dimensionOfGrid() -> UInt?
 }
 
 class GameBoardView: UIView {
@@ -42,6 +45,7 @@ class GameBoardView: UIView {
     private var correctPaths: [[GridCoordinate]]
     
     weak var delegate: GameBoardViewDelegate?
+    weak var dataSource: GameBoardViewDataSource?
     
     required init?(coder aDecoder: NSCoder) {
         self.selectedColor = UIColor.grayColor()
@@ -291,27 +295,27 @@ class GameBoardView: UIView {
             return nil
         }
         
-        guard let gridDimension = delegate?.dimensionOfGrid() else {
+        guard let gridSize = dataSource?.dimensionOfGrid() else {
             return nil
         }
         
-        return self.convert(index: UInt(index), toCoordinateInGridWithDimension: gridDimension)
+        return self.convert(index: UInt(index), toCoordinateInGridWithDimension: gridSize)
     }
     
     private func convert(coordinate coord: GridCoordinate, toIndexWithGridDimension dimension: [UInt]) -> Int {
         return Int(coord.row * dimension[0] + coord.col)
     }
     
-    private func convert(index index: UInt, toCoordinateInGridWithDimension dimension: [UInt]) -> GridCoordinate {
-        return GridCoordinate(row: index / dimension[0], col: index % dimension[1])
+    private func convert(index index: UInt, toCoordinateInGridWithDimension dimension: UInt) -> GridCoordinate {
+        return GridCoordinate(row: index / dimension, col: index % dimension)
     }
     
     private func viewAtGridCoordinate(coordinate coord: GridCoordinate) -> UIView? {
-        guard let gridDimension = self.delegate?.dimensionOfGrid() else {
+        guard let gridSize = self.dataSource?.dimensionOfGrid() else {
             return nil
         }
         
-        let index = Int(coord.row * gridDimension[0] + coord.col)
+        let index = Int(coord.row * gridSize + coord.col)
         return self.subviews[index]
     }
     

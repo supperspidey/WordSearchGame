@@ -8,8 +8,9 @@
 
 import UIKit
 
-class GameBoardDataSource: NSObject {
+class GameBoardDataSource: NSObject, GameBoardViewDataSource {
     private var gameBoardsQueue: Queue<GameBoard>
+    private(set) var currentGameBoard: GameBoard?
     
     override init() {
         self.gameBoardsQueue = Queue<GameBoard>()
@@ -72,8 +73,14 @@ class GameBoardDataSource: NSObject {
         task.resume()
     }
     
-    func revealNextGame() -> GameBoard? {
-        return gameBoardsQueue.dequeue()
+    func revealNextGame() -> Void {
+        self.currentGameBoard = gameBoardsQueue.dequeue()
+    }
+    
+    // MARK: GameBoardView's data source method
+    
+    func dimensionOfGrid() -> UInt? {
+        return self.currentGameBoard?.gridSize
     }
     
 }

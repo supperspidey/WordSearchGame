@@ -15,7 +15,6 @@ class ViewController: UIViewController, GameBoardViewDelegate {
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
     private let dataSource = GameBoardDataSource()
-    private var currentGameBoard: GameBoard?
     
     // MARK: View controller's life cycle
     
@@ -24,6 +23,7 @@ class ViewController: UIViewController, GameBoardViewDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         self.gameBoardView.delegate = self
+        self.gameBoardView.dataSource = dataSource
         
         self.activityIndicatorView.startAnimating()
         dataSource.fetchGameBoardData { [weak self] () -> Void in
@@ -43,7 +43,7 @@ class ViewController: UIViewController, GameBoardViewDelegate {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         
         coordinator.animateAlongsideTransition({ (context: UIViewControllerTransitionCoordinatorContext) -> Void in
-            guard let gridSize = self.currentGameBoard?.gridSize else {
+            guard let gridSize = self.dataSource.currentGameBoard?.gridSize else {
                 return
             }
             
@@ -54,7 +54,9 @@ class ViewController: UIViewController, GameBoardViewDelegate {
     // MARK: Helper methods
     
     private func loadNextGameBoard() -> Void {
-        guard let gameBoard = dataSource.revealNextGame() else {
+        dataSource.revealNextGame()
+        
+        guard let gameBoard = dataSource.currentGameBoard else {
             self.navigationController?.popViewControllerAnimated(true)
             return
         }
@@ -66,7 +68,6 @@ class ViewController: UIViewController, GameBoardViewDelegate {
         }
         
         sourceWordLabel.text = gameBoard.sourceWord
-        self.currentGameBoard = gameBoard
         
         guard let grid = gameBoard.characterGrid, gridSize = gameBoard.gridSize else {
             return
@@ -83,13 +84,13 @@ class ViewController: UIViewController, GameBoardViewDelegate {
         self.layoutSubviewsInGameBoardView(gridDimension: gridSize)
     }
     
-    private func layoutSubviewsInGameBoardView(gridDimension dimension: [UInt]) {
+    private func layoutSubviewsInGameBoardView(gridDimension dimension: UInt) {
         let superViewDimension = self.gameBoardView.bounds.height
         let space: CGFloat = 1
         var xPos: CGFloat = space
         var yPos: CGFloat = space
         var currentRow: UInt = 0
-        let viewDimension: CGFloat = (superViewDimension - CGFloat(dimension[0]+1) * space) / CGFloat(dimension[0])
+        let viewDimension: CGFloat = (superViewDimension - CGFloat(dimension+1) * space) / CGFloat(dimension)
         for aView in gameBoardView.subviews {
             if aView.isKindOfClass(UILabel) {
                 let label = aView as! UILabel
@@ -137,14 +138,10 @@ class ViewController: UIViewController, GameBoardViewDelegate {
         return coords
     }
     
-    // MARK: GameBoardView's delegate methods
-    
-    func dimensionOfGrid() -> [UInt]? {
-        return self.currentGameBoard?.gridSize
-    }
+    // MARK: GameBoardView's delegate method
     
     func gameBoardViewDidFinishSelectingCharacters(atCoordinates coords: [GridCoordinate]?) {
-        guard let visitedCoords = coords, gameBoard = self.currentGameBoard else {
+        guard let visitedCoords = coords, gameBoard = self.dataSource.currentGameBoard else {
             return
         }
         
