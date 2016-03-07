@@ -8,22 +8,26 @@
 
 import UIKit
 
-class GameBoardDataSource: NSObject, GameBoardViewDataSource {
-    private var gameBoardsQueue: Queue<GameBoard>
+class GameBoardDataSource: GameBoardViewDataSource {
+    private var gameBoardsQueue: Queue<GameBoard>?
     private(set) var currentGameBoard: GameBoard?
+    private var url: NSURL?
     
-    override init() {
-        self.gameBoardsQueue = Queue<GameBoard>()
+    init?(withURL url: NSURL?) {
+        guard let theURL = url else {
+            return nil
+        }
         
-        super.init()
+        self.url = theURL
+        self.gameBoardsQueue = Queue<GameBoard>()
     }
     
     func fetchGameBoardData (completionHandler: (() -> Void)?) {
-        guard let url = NSURL(string: "https://s3.amazonaws.com/duolingo-data/s3/js2/find_challenges.txt") else {
+        guard let theURL = url else {
             return
         }
         
-        let urlRequest = NSURLRequest(URL: url)
+        let urlRequest = NSURLRequest(URL: theURL)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(urlRequest) {
             [weak self] (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
@@ -54,7 +58,7 @@ class GameBoardDataSource: NSObject, GameBoardViewDataSource {
                                 continue
                             }
                             
-                            strongSelf.gameBoardsQueue.enqueue(gameBoard)
+                            strongSelf.gameBoardsQueue?.enqueue(gameBoard)
                         }
                     } catch {
                         continue
@@ -74,7 +78,7 @@ class GameBoardDataSource: NSObject, GameBoardViewDataSource {
     }
     
     func revealNextGame() -> Void {
-        self.currentGameBoard = gameBoardsQueue.dequeue()
+        self.currentGameBoard = gameBoardsQueue?.dequeue()
     }
     
     // MARK: GameBoardView's data source method

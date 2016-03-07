@@ -14,7 +14,7 @@ class ViewController: UIViewController, GameBoardViewDelegate {
     @IBOutlet weak var gameBoardView: GameBoardView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
-    private let dataSource = GameBoardDataSource()
+    private let dataSource = GameBoardDataSource(withURL: NSURL(string: "https://s3.amazonaws.com/duolingo-data/s3/js2/find_challenges.txt"))
     
     // MARK: View controller's life cycle
     
@@ -26,7 +26,7 @@ class ViewController: UIViewController, GameBoardViewDelegate {
         self.gameBoardView.dataSource = dataSource
         
         self.activityIndicatorView.startAnimating()
-        dataSource.fetchGameBoardData { [weak self] () -> Void in
+        dataSource?.fetchGameBoardData { [weak self] () -> Void in
             if let strongSelf = self {
                 strongSelf.loadNextGameBoard()
                 strongSelf.activityIndicatorView.stopAnimating()
@@ -43,7 +43,7 @@ class ViewController: UIViewController, GameBoardViewDelegate {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         
         coordinator.animateAlongsideTransition({ (context: UIViewControllerTransitionCoordinatorContext) -> Void in
-            guard let gridSize = self.dataSource.currentGameBoard?.gridSize else {
+            guard let gridSize = self.dataSource?.currentGameBoard?.gridSize else {
                 return
             }
             
@@ -54,9 +54,9 @@ class ViewController: UIViewController, GameBoardViewDelegate {
     // MARK: Helper methods
     
     private func loadNextGameBoard() -> Void {
-        dataSource.revealNextGame()
+        dataSource?.revealNextGame()
         
-        guard let gameBoard = dataSource.currentGameBoard else {
+        guard let gameBoard = dataSource?.currentGameBoard else {
             self.navigationController?.popViewControllerAnimated(true)
             return
         }
@@ -141,7 +141,7 @@ class ViewController: UIViewController, GameBoardViewDelegate {
     // MARK: GameBoardView's delegate method
     
     func gameBoardViewDidFinishSelectingCharacters(atCoordinates coords: [GridCoordinate]?) {
-        guard let visitedCoords = coords, gameBoard = self.dataSource.currentGameBoard else {
+        guard let visitedCoords = coords, gameBoard = self.dataSource?.currentGameBoard else {
             return
         }
         
