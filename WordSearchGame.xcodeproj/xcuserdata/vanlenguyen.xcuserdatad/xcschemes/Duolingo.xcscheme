@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "735E5A9F1C89F75500E57F70"
-               BuildableName = "Duolingo.app"
-               BlueprintName = "Duolingo"
+               BuildableName = "WordSearchGame.app"
+               BlueprintName = "WordSearchGame"
                ReferencedContainer = "container:WordSearchGame.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "735E5AB31C89F75500E57F70"
-               BuildableName = "DuolingoTests.xctest"
-               BlueprintName = "DuolingoTests"
+               BuildableName = "WordSearchGameTests.xctest"
+               BlueprintName = "WordSearchGameTests"
                ReferencedContainer = "container:WordSearchGame.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -43,8 +43,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "735E5ABE1C89F75500E57F70"
-               BuildableName = "DuolingoUITests.xctest"
-               BlueprintName = "DuolingoUITests"
+               BuildableName = "WordSearchGameUITests.xctest"
+               BlueprintName = "WordSearchGameUITests"
                ReferencedContainer = "container:WordSearchGame.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -53,8 +53,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "735E5A9F1C89F75500E57F70"
-            BuildableName = "Duolingo.app"
-            BlueprintName = "Duolingo"
+            BuildableName = "WordSearchGame.app"
+            BlueprintName = "WordSearchGame"
             ReferencedContainer = "container:WordSearchGame.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -76,8 +76,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "735E5A9F1C89F75500E57F70"
-            BuildableName = "Duolingo.app"
-            BlueprintName = "Duolingo"
+            BuildableName = "WordSearchGame.app"
+            BlueprintName = "WordSearchGame"
             ReferencedContainer = "container:WordSearchGame.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -95,8 +95,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "735E5A9F1C89F75500E57F70"
-            BuildableName = "Duolingo.app"
-            BlueprintName = "Duolingo"
+            BuildableName = "WordSearchGame.app"
+            BlueprintName = "WordSearchGame"
             ReferencedContainer = "container:WordSearchGame.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

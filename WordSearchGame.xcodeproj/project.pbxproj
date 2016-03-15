@@ -62,9 +62,9 @@
 		73019CB21C985BDC00791977 /* WordSearchGameUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WordSearchGameUITests.swift; path = WordSearchGameUITests/WordSearchGameUITests.swift; sourceTree = "<group>"; };
 		73019CBC1C985C8800791977 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = WordSearchGame/Base.lproj/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		73019CBE1C985C8800791977 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = WordSearchGame/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
-		735E5AA01C89F75500E57F70 /* Duolingo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Duolingo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		735E5AB41C89F75500E57F70 /* DuolingoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DuolingoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		735E5ABF1C89F75500E57F70 /* DuolingoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DuolingoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		735E5AA01C89F75500E57F70 /* WordSearchGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordSearchGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		735E5AB41C89F75500E57F70 /* WordSearchGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WordSearchGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		735E5ABF1C89F75500E57F70 /* WordSearchGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WordSearchGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,9 +125,9 @@
 		735E5AA11C89F75500E57F70 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				735E5AA01C89F75500E57F70 /* Duolingo.app */,
-				735E5AB41C89F75500E57F70 /* DuolingoTests.xctest */,
-				735E5ABF1C89F75500E57F70 /* DuolingoUITests.xctest */,
+				735E5AA01C89F75500E57F70 /* WordSearchGame.app */,
+				735E5AB41C89F75500E57F70 /* WordSearchGameTests.xctest */,
+				735E5ABF1C89F75500E57F70 /* WordSearchGameUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -155,9 +155,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		735E5A9F1C89F75500E57F70 /* Duolingo */ = {
+		735E5A9F1C89F75500E57F70 /* WordSearchGame */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 735E5AC81C89F75500E57F70 /* Build configuration list for PBXNativeTarget "Duolingo" */;
+			buildConfigurationList = 735E5AC81C89F75500E57F70 /* Build configuration list for PBXNativeTarget "WordSearchGame" */;
 			buildPhases = (
 				735E5A9C1C89F75500E57F70 /* Sources */,
 				735E5A9D1C89F75500E57F70 /* Frameworks */,
@@ -167,14 +167,14 @@
 			);
 			dependencies = (
 			);
-			name = Duolingo;
+			name = WordSearchGame;
 			productName = Duolingo;
-			productReference = 735E5AA01C89F75500E57F70 /* Duolingo.app */;
+			productReference = 735E5AA01C89F75500E57F70 /* WordSearchGame.app */;
 			productType = "com.apple.product-type.application";
 		};
-		735E5AB31C89F75500E57F70 /* DuolingoTests */ = {
+		735E5AB31C89F75500E57F70 /* WordSearchGameTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 735E5ACB1C89F75500E57F70 /* Build configuration list for PBXNativeTarget "DuolingoTests" */;
+			buildConfigurationList = 735E5ACB1C89F75500E57F70 /* Build configuration list for PBXNativeTarget "WordSearchGameTests" */;
 			buildPhases = (
 				735E5AB01C89F75500E57F70 /* Sources */,
 				735E5AB11C89F75500E57F70 /* Frameworks */,
@@ -185,14 +185,14 @@
 			dependencies = (
 				735E5AB61C89F75500E57F70 /* PBXTargetDependency */,
 			);
-			name = DuolingoTests;
+			name = WordSearchGameTests;
 			productName = DuolingoTests;
-			productReference = 735E5AB41C89F75500E57F70 /* DuolingoTests.xctest */;
+			productReference = 735E5AB41C89F75500E57F70 /* WordSearchGameTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		735E5ABE1C89F75500E57F70 /* DuolingoUITests */ = {
+		735E5ABE1C89F75500E57F70 /* WordSearchGameUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 735E5ACE1C89F75500E57F70 /* Build configuration list for PBXNativeTarget "DuolingoUITests" */;
+			buildConfigurationList = 735E5ACE1C89F75500E57F70 /* Build configuration list for PBXNativeTarget "WordSearchGameUITests" */;
 			buildPhases = (
 				735E5ABB1C89F75500E57F70 /* Sources */,
 				735E5ABC1C89F75500E57F70 /* Frameworks */,
@@ -203,9 +203,9 @@
 			dependencies = (
 				735E5AC11C89F75500E57F70 /* PBXTargetDependency */,
 			);
-			name = DuolingoUITests;
+			name = WordSearchGameUITests;
 			productName = DuolingoUITests;
-			productReference = 735E5ABF1C89F75500E57F70 /* DuolingoUITests.xctest */;
+			productReference = 735E5ABF1C89F75500E57F70 /* WordSearchGameUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -245,9 +245,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				735E5A9F1C89F75500E57F70 /* Duolingo */,
-				735E5AB31C89F75500E57F70 /* DuolingoTests */,
-				735E5ABE1C89F75500E57F70 /* DuolingoUITests */,
+				735E5A9F1C89F75500E57F70 /* WordSearchGame */,
+				735E5AB31C89F75500E57F70 /* WordSearchGameTests */,
+				735E5ABE1C89F75500E57F70 /* WordSearchGameUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -320,12 +320,12 @@
 /* Begin PBXTargetDependency section */
 		735E5AB61C89F75500E57F70 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 735E5A9F1C89F75500E57F70 /* Duolingo */;
+			target = 735E5A9F1C89F75500E57F70 /* WordSearchGame */;
 			targetProxy = 735E5AB51C89F75500E57F70 /* PBXContainerItemProxy */;
 		};
 		735E5AC11C89F75500E57F70 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 735E5A9F1C89F75500E57F70 /* Duolingo */;
+			target = 735E5A9F1C89F75500E57F70 /* WordSearchGame */;
 			targetProxy = 735E5AC01C89F75500E57F70 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -526,7 +526,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		735E5AC81C89F75500E57F70 /* Build configuration list for PBXNativeTarget "Duolingo" */ = {
+		735E5AC81C89F75500E57F70 /* Build configuration list for PBXNativeTarget "WordSearchGame" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				735E5AC91C89F75500E57F70 /* Debug */,
@@ -535,7 +535,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		735E5ACB1C89F75500E57F70 /* Build configuration list for PBXNativeTarget "DuolingoTests" */ = {
+		735E5ACB1C89F75500E57F70 /* Build configuration list for PBXNativeTarget "WordSearchGameTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				735E5ACC1C89F75500E57F70 /* Debug */,
@@ -544,7 +544,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		735E5ACE1C89F75500E57F70 /* Build configuration list for PBXNativeTarget "DuolingoUITests" */ = {
+		735E5ACE1C89F75500E57F70 /* Build configuration list for PBXNativeTarget "WordSearchGameUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				735E5ACF1C89F75500E57F70 /* Debug */,
