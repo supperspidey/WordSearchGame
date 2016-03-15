@@ -14,7 +14,8 @@ class ViewController: UIViewController, GameBoardViewDelegate {
     @IBOutlet weak var gameBoardView: GameBoardView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
-    private let dataSource = GameBoardDataSource(withURL: NSURL(string: "https://s3.amazonaws.com/duolingo-data/s3/js2/find_challenges.txt"))
+    private let dataSource = GameBoardDataSource(withURL: NSBundle.mainBundle().URLForResource("source", withExtension: "txt"),
+        isFromInternet: true)
     
     // MARK: View controller's life cycle
     

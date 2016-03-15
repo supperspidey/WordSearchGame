@@ -12,17 +12,31 @@ class GameBoardDataSource: GameBoardViewDataSource {
     private var gameBoardsQueue: Queue<GameBoard>?
     private(set) var currentGameBoard: GameBoard?
     private var url: NSURL?
+    private var dataFromInternet: Bool?
     
-    init?(withURL url: NSURL?) {
+    init?(withURL url: NSURL?, isFromInternet fromInternet: Bool) {
         guard let theURL = url else {
             return nil
         }
         
+        self.dataFromInternet = fromInternet
         self.url = theURL
         self.gameBoardsQueue = Queue<GameBoard>()
     }
     
     func fetchGameBoardData (completionHandler: (() -> Void)?) {
+        guard let fromInternet = dataFromInternet else {
+            return
+        }
+        
+        if (fromInternet) {
+            self.loadDataFromInternet(completionHandler)
+        } else {
+            self.loadDataFromBundle(completionHandler)
+        }
+    }
+    
+    private func loadDataFromInternet(completionHandler: (() -> Void)?) {
         guard let theURL = url else {
             return
         }
@@ -32,38 +46,11 @@ class GameBoardDataSource: GameBoardViewDataSource {
         let task = session.dataTaskWithRequest(urlRequest) {
             [weak self] (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
             if error == nil {
-                guard let theData = data, result = NSString(data: theData, encoding: NSUTF8StringEncoding) else {
+                guard let theData = data, strongSelf = self else {
                     return
                 }
                 
-                let results = result.componentsSeparatedByString("\n")
-                for jsonString in results {
-                    guard let gameData = jsonString.dataUsingEncoding(NSUTF8StringEncoding) else {
-                        continue
-                    }
-                    
-                    do {
-                        guard let dict = try NSJSONSerialization.JSONObjectWithData(gameData, options: .AllowFragments) as? NSDictionary else {
-                            continue
-                        }
-                        
-                        if let strongSelf = self {
-                            guard let source = dict[JSONKeys.Word] as? String,
-                                grid = dict[JSONKeys.CharacterGrid] as? [[String]],
-                                locations = dict[JSONKeys.WordLocations]?.allKeys as? [String] else {
-                                continue
-                            }
-                            
-                            guard let gameBoard = GameBoard(withSourceWord: source, characterGrid: grid, answerLocations: locations) else {
-                                continue
-                            }
-                            
-                            strongSelf.gameBoardsQueue?.enqueue(gameBoard)
-                        }
-                    } catch {
-                        continue
-                    }
-                }
+                strongSelf.deserializeThenQueueUp(withData: theData)
                 
                 guard let handler = completionHandler else {
                     return
@@ -75,6 +62,54 @@ class GameBoardDataSource: GameBoardViewDataSource {
             }
         }
         task.resume()
+    }
+    
+    private func loadDataFromBundle(completionHandler: (() -> Void)?) {
+        guard let theURL = url,
+            data = NSData(contentsOfURL: theURL) else {
+            return
+        }
+        
+        self.deserializeThenQueueUp(withData: data)
+        
+        guard let handler = completionHandler else {
+            return
+        }
+        
+        handler()
+    }
+    
+    private func deserializeThenQueueUp(withData data: NSData) {
+        guard let result = NSString(data: data, encoding: NSUTF8StringEncoding) else {
+            return
+        }
+        
+        let results = result.componentsSeparatedByString("\n")
+        for jsonString in results {
+            guard let gameData = jsonString.dataUsingEncoding(NSUTF8StringEncoding) else {
+                continue
+            }
+            
+            do {
+                guard let dict = try NSJSONSerialization.JSONObjectWithData(gameData, options: .AllowFragments) as? NSDictionary else {
+                    continue
+                }
+                
+                guard let source = dict[JSONKeys.Word] as? String,
+                    grid = dict[JSONKeys.CharacterGrid] as? [[String]],
+                    locations = dict[JSONKeys.WordLocations]?.allKeys as? [String] else {
+                        continue
+                }
+                
+                guard let gameBoard = GameBoard(withSourceWord: source, characterGrid: grid, answerLocations: locations) else {
+                    continue
+                }
+                
+                self.gameBoardsQueue?.enqueue(gameBoard)
+            } catch {
+                continue
+            }
+        }
     }
     
     func revealNextGame() -> Void {
