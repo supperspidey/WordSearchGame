@@ -1,17 +1,17 @@
 //
-//  DuolingoTests.swift
-//  DuolingoTests
+//  WordSearchGameTests.swift
+//  WordSearchGame
 //
-//  Created by Van Le Nguyen on 3/4/16.
+//  Created by Van Nguyen on 3/15/16.
 //  Copyright © 2016 Van Le Nguyen. All rights reserved.
 //
 
 import XCTest
-@testable import Duolingo
+@testable import WordSearchGame
 
-class DuolingoTests: XCTestCase {
+class WordSearchGameTests: XCTestCase {
     
-    private var testBundle: NSBundle = NSBundle(forClass: DuolingoTests.self)
+    private var testBundle: NSBundle = NSBundle(forClass: WordSearchGameTests.self)
     
     override func setUp() {
         super.setUp()
@@ -58,7 +58,7 @@ class DuolingoTests: XCTestCase {
         guard let source = jsonObj[JSONKeys.Word] as? String,
             grid = jsonObj[JSONKeys.CharacterGrid] as? [[String]],
             locations = jsonObj[JSONKeys.WordLocations]?.allKeys as? [String] else {
-            return
+                return
         }
         
         guard let gameBoard = GameBoard(
@@ -66,7 +66,7 @@ class DuolingoTests: XCTestCase {
             characterGrid: grid,
             answerLocations: locations
             ) else {
-            return
+                return
         }
         
         guard let isCorrect = gameBoard.checkAnswer(withCoordinates: "6,1,6,2,6,3,6,4,6,5,6,6") else {
@@ -220,3 +220,4 @@ class DuolingoTests: XCTestCase {
     }
     
 }
+

@@ -16,30 +16,20 @@
 		73019C9E1C985B5200791977 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73019C931C985B5200791977 /* Queue.swift */; };
 		73019C9F1C985B5200791977 /* source.txt in Resources */ = {isa = PBXBuildFile; fileRef = 73019C941C985B5200791977 /* source.txt */; };
 		73019CA01C985B5200791977 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73019C951C985B5200791977 /* ViewController.swift */; };
-		73019CB51C985BF400791977 /* WordSearchGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73019CAB1C985BC400791977 /* WordSearchGameTests.swift */; };
-		73019CB61C985C0600791977 /* WordSearchGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73019CB21C985BDC00791977 /* WordSearchGameUITests.swift */; };
-		73019CB71C985C0C00791977 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 73019CB11C985BDC00791977 /* Info.plist */; };
-		73019CB81C985C1600791977 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 73019CA81C985BC400791977 /* Info.plist */; };
-		73019CB91C985C1A00791977 /* Test1.json in Resources */ = {isa = PBXBuildFile; fileRef = 73019CA91C985BC400791977 /* Test1.json */; };
-		73019CBA1C985C1E00791977 /* Test2.json in Resources */ = {isa = PBXBuildFile; fileRef = 73019CAA1C985BC400791977 /* Test2.json */; };
 		73019CBF1C985C8800791977 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73019CBB1C985C8800791977 /* LaunchScreen.storyboard */; };
 		73019CC01C985C8800791977 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73019CBD1C985C8800791977 /* Main.storyboard */; };
+		C4F5D2601C98E58800392C01 /* Test1.json in Resources */ = {isa = PBXBuildFile; fileRef = C4F5D25D1C98E58800392C01 /* Test1.json */; };
+		C4F5D2611C98E58800392C01 /* Test2.json in Resources */ = {isa = PBXBuildFile; fileRef = C4F5D25E1C98E58800392C01 /* Test2.json */; };
+		C4F5D2641C98E5C800392C01 /* WordSearchGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5D2631C98E5C800392C01 /* WordSearchGameTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		735E5AB51C89F75500E57F70 /* PBXContainerItemProxy */ = {
+		C4F5D2581C98E54700392C01 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 735E5A981C89F75500E57F70 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 735E5A9F1C89F75500E57F70;
-			remoteInfo = Duolingo;
-		};
-		735E5AC01C89F75500E57F70 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 735E5A981C89F75500E57F70 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 735E5A9F1C89F75500E57F70;
-			remoteInfo = Duolingo;
+			remoteInfo = WordSearchGame;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -54,17 +44,14 @@
 		73019C931C985B5200791977 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Queue.swift; path = WordSearchGame/Queue.swift; sourceTree = SOURCE_ROOT; };
 		73019C941C985B5200791977 /* source.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = source.txt; path = WordSearchGame/source.txt; sourceTree = SOURCE_ROOT; };
 		73019C951C985B5200791977 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = WordSearchGame/ViewController.swift; sourceTree = SOURCE_ROOT; };
-		73019CA81C985BC400791977 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = WordSearchGameTests/Info.plist; sourceTree = "<group>"; };
-		73019CA91C985BC400791977 /* Test1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Test1.json; path = WordSearchGameTests/Test1.json; sourceTree = "<group>"; };
-		73019CAA1C985BC400791977 /* Test2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Test2.json; path = WordSearchGameTests/Test2.json; sourceTree = "<group>"; };
-		73019CAB1C985BC400791977 /* WordSearchGameTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WordSearchGameTests.swift; path = WordSearchGameTests/WordSearchGameTests.swift; sourceTree = "<group>"; };
-		73019CB11C985BDC00791977 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = WordSearchGameUITests/Info.plist; sourceTree = "<group>"; };
-		73019CB21C985BDC00791977 /* WordSearchGameUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WordSearchGameUITests.swift; path = WordSearchGameUITests/WordSearchGameUITests.swift; sourceTree = "<group>"; };
 		73019CBC1C985C8800791977 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = WordSearchGame/Base.lproj/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		73019CBE1C985C8800791977 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = WordSearchGame/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		735E5AA01C89F75500E57F70 /* WordSearchGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordSearchGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		735E5AB41C89F75500E57F70 /* WordSearchGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WordSearchGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		735E5ABF1C89F75500E57F70 /* WordSearchGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WordSearchGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4F5D2531C98E54700392C01 /* WordSearchGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WordSearchGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4F5D2571C98E54700392C01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4F5D25D1C98E58800392C01 /* Test1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Test1.json; sourceTree = "<group>"; };
+		C4F5D25E1C98E58800392C01 /* Test2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Test2.json; sourceTree = "<group>"; };
+		C4F5D2631C98E5C800392C01 /* WordSearchGameTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordSearchGameTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,14 +62,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		735E5AB11C89F75500E57F70 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		735E5ABC1C89F75500E57F70 /* Frameworks */ = {
+		C4F5D2501C98E54700392C01 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -92,32 +72,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		73019CA51C985BA300791977 /* WordSearchGameTests */ = {
-			isa = PBXGroup;
-			children = (
-				73019CA81C985BC400791977 /* Info.plist */,
-				73019CA91C985BC400791977 /* Test1.json */,
-				73019CAA1C985BC400791977 /* Test2.json */,
-				73019CAB1C985BC400791977 /* WordSearchGameTests.swift */,
-			);
-			name = WordSearchGameTests;
-			sourceTree = "<group>";
-		};
-		73019CB01C985BCA00791977 /* WordSearchGameUITests */ = {
-			isa = PBXGroup;
-			children = (
-				73019CB11C985BDC00791977 /* Info.plist */,
-				73019CB21C985BDC00791977 /* WordSearchGameUITests.swift */,
-			);
-			name = WordSearchGameUITests;
-			sourceTree = "<group>";
-		};
 		735E5A971C89F75500E57F70 = {
 			isa = PBXGroup;
 			children = (
-				73019CB01C985BCA00791977 /* WordSearchGameUITests */,
-				73019CA51C985BA300791977 /* WordSearchGameTests */,
 				735E5AA21C89F75500E57F70 /* WordSearchGame */,
+				C4F5D2541C98E54700392C01 /* WordSearchGameTests */,
 				735E5AA11C89F75500E57F70 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -126,8 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				735E5AA01C89F75500E57F70 /* WordSearchGame.app */,
-				735E5AB41C89F75500E57F70 /* WordSearchGameTests.xctest */,
-				735E5ABF1C89F75500E57F70 /* WordSearchGameUITests.xctest */,
+				C4F5D2531C98E54700392C01 /* WordSearchGameTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -152,6 +110,17 @@
 			path = Duolingo;
 			sourceTree = "<group>";
 		};
+		C4F5D2541C98E54700392C01 /* WordSearchGameTests */ = {
+			isa = PBXGroup;
+			children = (
+				C4F5D25D1C98E58800392C01 /* Test1.json */,
+				C4F5D25E1C98E58800392C01 /* Test2.json */,
+				C4F5D2571C98E54700392C01 /* Info.plist */,
+				C4F5D2631C98E5C800392C01 /* WordSearchGameTests.swift */,
+			);
+			path = WordSearchGameTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -172,41 +141,23 @@
 			productReference = 735E5AA01C89F75500E57F70 /* WordSearchGame.app */;
 			productType = "com.apple.product-type.application";
 		};
-		735E5AB31C89F75500E57F70 /* WordSearchGameTests */ = {
+		C4F5D2521C98E54700392C01 /* WordSearchGameTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 735E5ACB1C89F75500E57F70 /* Build configuration list for PBXNativeTarget "WordSearchGameTests" */;
+			buildConfigurationList = C4F5D25A1C98E54700392C01 /* Build configuration list for PBXNativeTarget "WordSearchGameTests" */;
 			buildPhases = (
-				735E5AB01C89F75500E57F70 /* Sources */,
-				735E5AB11C89F75500E57F70 /* Frameworks */,
-				735E5AB21C89F75500E57F70 /* Resources */,
+				C4F5D24F1C98E54700392C01 /* Sources */,
+				C4F5D2501C98E54700392C01 /* Frameworks */,
+				C4F5D2511C98E54700392C01 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				735E5AB61C89F75500E57F70 /* PBXTargetDependency */,
+				C4F5D2591C98E54700392C01 /* PBXTargetDependency */,
 			);
 			name = WordSearchGameTests;
-			productName = DuolingoTests;
-			productReference = 735E5AB41C89F75500E57F70 /* WordSearchGameTests.xctest */;
+			productName = WordSearchGameTests;
+			productReference = C4F5D2531C98E54700392C01 /* WordSearchGameTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		735E5ABE1C89F75500E57F70 /* WordSearchGameUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 735E5ACE1C89F75500E57F70 /* Build configuration list for PBXNativeTarget "WordSearchGameUITests" */;
-			buildPhases = (
-				735E5ABB1C89F75500E57F70 /* Sources */,
-				735E5ABC1C89F75500E57F70 /* Frameworks */,
-				735E5ABD1C89F75500E57F70 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				735E5AC11C89F75500E57F70 /* PBXTargetDependency */,
-			);
-			name = WordSearchGameUITests;
-			productName = DuolingoUITests;
-			productReference = 735E5ABF1C89F75500E57F70 /* WordSearchGameUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -222,11 +173,7 @@
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = K672Z5FPJS;
 					};
-					735E5AB31C89F75500E57F70 = {
-						CreatedOnToolsVersion = 7.2.1;
-						TestTargetID = 735E5A9F1C89F75500E57F70;
-					};
-					735E5ABE1C89F75500E57F70 = {
+					C4F5D2521C98E54700392C01 = {
 						CreatedOnToolsVersion = 7.2.1;
 						TestTargetID = 735E5A9F1C89F75500E57F70;
 					};
@@ -246,8 +193,7 @@
 			projectRoot = "";
 			targets = (
 				735E5A9F1C89F75500E57F70 /* WordSearchGame */,
-				735E5AB31C89F75500E57F70 /* WordSearchGameTests */,
-				735E5ABE1C89F75500E57F70 /* WordSearchGameUITests */,
+				C4F5D2521C98E54700392C01 /* WordSearchGameTests */,
 			);
 		};
 /* End PBXProject section */
@@ -264,21 +210,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		735E5AB21C89F75500E57F70 /* Resources */ = {
+		C4F5D2511C98E54700392C01 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73019CB81C985C1600791977 /* Info.plist in Resources */,
-				73019CBA1C985C1E00791977 /* Test2.json in Resources */,
-				73019CB91C985C1A00791977 /* Test1.json in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		735E5ABD1C89F75500E57F70 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				73019CB71C985C0C00791977 /* Info.plist in Resources */,
+				C4F5D2611C98E58800392C01 /* Test2.json in Resources */,
+				C4F5D2601C98E58800392C01 /* Test1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,34 +236,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		735E5AB01C89F75500E57F70 /* Sources */ = {
+		C4F5D24F1C98E54700392C01 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73019CB51C985BF400791977 /* WordSearchGameTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		735E5ABB1C89F75500E57F70 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				73019CB61C985C0600791977 /* WordSearchGameUITests.swift in Sources */,
+				C4F5D2641C98E5C800392C01 /* WordSearchGameTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		735E5AB61C89F75500E57F70 /* PBXTargetDependency */ = {
+		C4F5D2591C98E54700392C01 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 735E5A9F1C89F75500E57F70 /* WordSearchGame */;
-			targetProxy = 735E5AB51C89F75500E57F70 /* PBXContainerItemProxy */;
-		};
-		735E5AC11C89F75500E57F70 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 735E5A9F1C89F75500E57F70 /* WordSearchGame */;
-			targetProxy = 735E5AC01C89F75500E57F70 /* PBXContainerItemProxy */;
+			targetProxy = C4F5D2581C98E54700392C01 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -466,51 +390,30 @@
 			};
 			name = Release;
 		};
-		735E5ACC1C89F75500E57F70 /* Debug */ = {
+		C4F5D25B1C98E54700392C01 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = DuolingoTests/Info.plist;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = WordSearchGameTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = vanlenguyen.DuolingoTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vannguyen.WordSearchGameTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Duolingo.app/Duolingo";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WordSearchGame.app/WordSearchGame";
 			};
 			name = Debug;
 		};
-		735E5ACD1C89F75500E57F70 /* Release */ = {
+		C4F5D25C1C98E54700392C01 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = DuolingoTests/Info.plist;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = WordSearchGameTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = vanlenguyen.DuolingoTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vannguyen.WordSearchGameTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Duolingo.app/Duolingo";
-			};
-			name = Release;
-		};
-		735E5ACF1C89F75500E57F70 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = DuolingoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = vanlenguyen.DuolingoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = Duolingo;
-				USES_XCTRUNNER = YES;
-			};
-			name = Debug;
-		};
-		735E5AD01C89F75500E57F70 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = DuolingoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = vanlenguyen.DuolingoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = Duolingo;
-				USES_XCTRUNNER = YES;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WordSearchGame.app/WordSearchGame";
 			};
 			name = Release;
 		};
@@ -535,23 +438,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		735E5ACB1C89F75500E57F70 /* Build configuration list for PBXNativeTarget "WordSearchGameTests" */ = {
+		C4F5D25A1C98E54700392C01 /* Build configuration list for PBXNativeTarget "WordSearchGameTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				735E5ACC1C89F75500E57F70 /* Debug */,
-				735E5ACD1C89F75500E57F70 /* Release */,
+				C4F5D25B1C98E54700392C01 /* Debug */,
+				C4F5D25C1C98E54700392C01 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		735E5ACE1C89F75500E57F70 /* Build configuration list for PBXNativeTarget "WordSearchGameUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				735E5ACF1C89F75500E57F70 /* Debug */,
-				735E5AD01C89F75500E57F70 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
